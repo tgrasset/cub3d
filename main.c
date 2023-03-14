@@ -6,11 +6,18 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/14 12:04:18 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:41:36 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(void)
+#include "cub3D.h"
+
+int main(int ac, char **av)
 {
-    return 0;
+    t_map   map;
+
+    if (ac != 2)
+        return (write(2, "Error\n", 6));
+    parse_cub_file(av[1], &map);    
+    return (0);
 }
