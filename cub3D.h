@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/14 13:24:44 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:38:30 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct  s_map
     char            *west;
     unsigned char   floor[3];
     unsigned char   ceiling[3];
+    char            **content;
+    int             grid_start;
     char            **grid;
 }               t_map;
 
