@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
+#    By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/14 12:01:58 by tgrasset         ###   ########.fr        #
+#    Updated: 2023/03/14 15:35:21 by ael-youb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ################################################################################
 ########### VARIABLES
 
-SRCS	=	./main.c \
+SRCS	=	./main.c minilibx_functions.c hooks.c\
 				
 OBJS	=	$(SRCS:%.c=%.o)
 
