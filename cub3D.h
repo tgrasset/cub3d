@@ -57,15 +57,20 @@ typedef struct	s_game
 	t_map	*map;
 	t_vars	*win;
 	t_data	*img;
+	float	player_x;
+	float	player_y;
+	int		mapp;
 }				t_game;
 
 //minilibx_functions
 void	init_mlx(t_game *game);
 void	add_to_image(t_game *game);
+void	draw_map(t_game *game);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 //hooks
 int		destroy_window(t_game *game);
 void	close_program(t_game *game);
+int		hook_slide(int keycode, t_game *game);
 
 #endif

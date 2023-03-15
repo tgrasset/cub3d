@@ -18,6 +18,28 @@ int	destroy_window(t_game *game)
 	return (1);
 }
 
+int	hook_slide(int keycode, t_game *game)
+{
+	if (keycode == 65361)
+	{
+		game->player_x -= 5;
+	}
+	else if (keycode == 65363)
+	{
+		game->player_x += 5;
+	}
+	else if (keycode == 65364)
+	{
+		game->player_y += 5;
+	}
+	else if (keycode == 65362)
+	{
+		game->player_y -= 5;
+	}
+	add_to_image(game);
+	return (keycode);
+}
+
 void	close_program(t_game *game)
 {
 	//NB: CLEAN LA MAP ici
