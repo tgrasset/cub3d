@@ -83,9 +83,9 @@ void	draw_map(t_game *game)
 		{
 			xo = x * 64;
 			yo = y * 64;
-			while (xo < ((x + 1) * 64) - 3) // 10px offset entre chaque case
+			while (xo < ((x + 1) * 64) - 1) // 10px offset entre chaque case
 			{
-				while (yo < ((y + 1) * 64) - 3)
+				while (yo < ((y + 1) * 64) - 1)
 				{
 					pixel_put(game->img, yo, xo,
 						0x00000000);
