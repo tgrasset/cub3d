@@ -6,18 +6,21 @@
 #    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/15 17:48:04 by tgrasset         ###   ########.fr        #
+#    Updated: 2023/03/15 18:36:23 by tgrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ################################################################################
 ########### VARIABLES
 
-SRCS	=	./parsing/parse_cub_file.c \
+SRCS	=	./main.c \
+			./parsing/parse_cub_file.c \
 			./parsing/parse_error.c \
 			./parsing/char_check_texture_paths.c \
 			./parsing/extract_content.c \
 			./parsing/get_rgb.c \
+			./minilibx_functions.c \
+			./hooks.c \
 				
 OBJS	=	$(SRCS:%.c=%.o)
 
