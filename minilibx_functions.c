@@ -32,6 +32,44 @@ void	pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void	draw_player(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = game->player_y;
+	j = game->player_x;
+	while (i < game->player_y + 10)
+	{
+		while (j < game->player_x + 10)
+		{
+			pixel_put(game->img, i, j,
+				0x80090888);
+			j++;
+		}
+		j = game->player_x;
+		i++;
+	}
+	i = game->player_y;
+	j = game->player_x;
+	int countx = 10;
+	int	county = 10;
+	while (countx)
+	{
+		while (county)
+		{
+			pixel_put(game->img, i, j,
+				0x80090888);
+			j -= game->player_deltax * 1;
+			county--;
+		}
+		j = game->player_x;
+		county = 10;
+		countx--;
+		i -= game->player_deltay * 1;
+	}
+}
+
 void	add_to_image(t_game *game)
 {
 	float	i;
@@ -51,19 +89,7 @@ void	add_to_image(t_game *game)
 		i++;
 	}
 	draw_map(game);
-	i = game->player_y;
-	j = game->player_x;
-	while (i < game->player_y + 10)
-	{
-		while (j < game->player_x + 10)
-		{
-			pixel_put(game->img, i, j,
-				0x80090888);
-			j++;
-		}
-		j = game->player_x;
-		i++;
-	}
+	draw_player(game);
 	mlx_put_image_to_window(game->win->mlx, game->win->mlx_win, game->img->img, 0, 0);
 }
 

@@ -26,6 +26,8 @@
 # include "./libft/libft.h"
 # include "minilibx-linux/mlx.h"
 
+# define PI 3.1415926535
+
 typedef struct  s_map
 {
     char            *north;
@@ -59,6 +61,9 @@ typedef struct	s_game
 	t_data	*img;
 	float	player_x;
 	float	player_y;
+	float	player_deltax;
+	float	player_deltay;
+	float	player_angle;
 	int		mapp;
 }				t_game;
 

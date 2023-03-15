@@ -20,21 +20,31 @@ int	destroy_window(t_game *game)
 
 int	hook_slide(int keycode, t_game *game)
 {
-	if (keycode == 65361)
+	if (keycode == 65361) // left
 	{
-		game->player_x -= 5;
+		game->player_angle -= 0.1;
+		if (game->player_angle < 0)
+			game->player_angle+= 2*PI;
+		game->player_deltax = cos(game->player_angle) * 5;
+		game->player_deltay = sin(game->player_angle) * 5;
 	}
-	else if (keycode == 65363)
+	else if (keycode == 65363) //right
 	{
-		game->player_x += 5;
+		game->player_angle += 0.1;
+		if (game->player_angle > 2*PI)
+			game->player_angle-= 2*PI;
+		game->player_deltax = cos(game->player_angle) * 5;
+		game->player_deltay = sin(game->player_angle) * 5;
 	}
 	else if (keycode == 65364)
 	{
-		game->player_y += 5;
+		game->player_x += game->player_deltax;
+		game->player_y += game->player_deltay;
 	}
 	else if (keycode == 65362)
 	{
-		game->player_y -= 5;
+		game->player_x -= game->player_deltax;
+		game->player_y -= game->player_deltay;
 	}
 	add_to_image(game);
 	return (keycode);
