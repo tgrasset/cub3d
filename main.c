@@ -19,9 +19,11 @@ int	main(int ac, char **av)
 	(void)ac;
 
 	game = (t_game *) malloc(sizeof(t_game) * 1);
-  game->player_x = 300;
-  game->player_y = 300;
-  game->player_angle = 0.1;
+	game->player_x = 300;
+	game->player_y = 300;
+	game->player_angle = 0.1;
+	game->player_deltax = cos(game->player_angle) * 5;
+	game->player_deltay = sin(game->player_angle) * 5;
 
 	init_mlx(game);
 	return (0);

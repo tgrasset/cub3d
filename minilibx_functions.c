@@ -50,24 +50,27 @@ void	draw_player(t_game *game)
 		j = game->player_x;
 		i++;
 	}
-	i = game->player_y;
-	j = game->player_x;
-	int countx = 10;
-	int	county = 10;
-	while (countx)
+}
+
+void	draw_ray(t_game *game)
+{
+	int	r, mx, my, mp, dof; float rx, ry, ra, xo, yo;
+
+	ra = game->player_angle;
+	r = 0;
+	while(r < 1) // on ne cast qu'un seul ray pour l'instant
 	{
-		while (county)
+		dof = 0;
+		float a_tan = -1/tan(ra);
+		if (ra > PI)
 		{
-			pixel_put(game->img, i, j,
-				0x80090888);
-			j -= game->player_deltax * 1;
-			county--;
+			ry = (((int)game->player_y>>6)<<6) - 0.0001;
+			rx = (game->player_y - ry) * a_tan + game->player_x;
+			yo = -64;
+			xo = -yo * a_tan;
 		}
-		j = game->player_x;
-		county = 10;
-		countx--;
-		i -= game->player_deltay * 1;
 	}
+
 }
 
 void	add_to_image(t_game *game)

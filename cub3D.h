@@ -71,6 +71,8 @@ typedef struct	s_game
 void	init_mlx(t_game *game);
 void	add_to_image(t_game *game);
 void	draw_map(t_game *game);
+void	draw_player(t_game *game);
+void	draw_ray(t_game *game);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 //hooks
