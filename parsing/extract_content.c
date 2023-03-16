@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:26:24 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 13:54:31 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:00:41 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,6 @@ int	is_valid_extension(char *path)
 	return (1);
 }
 
-void	transfer_content_to_struct(char *path, int height, t_map *map)
-{
-	int	i;
-	int	fd;
-
-	i = 0;
-	map->content = malloc(sizeof(char *) * (height + 1));
-	if (map->content == NULL)
-		parse_error(5, map);
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		parse_error(3, map);
-	while (i < height)
-	{
-		map->content[i] = get_next_line(fd);
-		if (map->content[i] == NULL)
-		{
-			close(fd);
-			parse_error(5, map);
-		}
-		i++;
-	}
-	map->content[i] = get_next_line(fd);
-	close(fd);
-}
-
 void	clean_new_lines(t_map *map)
 {
 	int	i;
@@ -88,30 +62,58 @@ void	clean_new_lines(t_map *map)
 	}
 }
 
+void	transfer_content_to_struct(char *path, int height, t_map *map)
+{
+	int	i;
+	int	fd;
+
+	i = 0;
+	map->content = malloc(sizeof(char *) * (height + 1));
+	if (map->content == NULL)
+		parse_error(5, map);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		parse_error(3, map);
+	while (i < height)
+	{
+		map->content[i] = get_next_line(fd);
+		if (i < height - 2 && map->content[i] == NULL)
+		{
+			close(fd);
+			parse_error(5, map);
+		}
+		i++;
+	}
+	map->content[i] = NULL;
+	close(fd);
+	clean_new_lines(map);
+}
+
 void	extract_cub_file_content(char *path, t_map *map)
 {
 	int		fd;
 	int		height;
-	char	*line;
+	char	buff[1];
+	int		bytes_read;
 
 	height = 0;
 	check_if_directory(path, map, 0);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		parse_error(3, map);
-	line = get_next_line(fd);
-	if (line == NULL)
+	bytes_read = 1;
+	while (bytes_read > 0)
 	{
-		close(fd);
-		parse_error(5, map);
+		bytes_read = read(fd, buff, 1);
+		if (bytes_read == -1)
+		{
+			close(fd);
+			parse_error(3, map);
+		}
+		if (buff[0] == '\n')
+			height++;
 	}
-	while (line != NULL)
-	{
-		free(line);
-		height++;
-		line = get_next_line(fd);
-	}
+	height++;
 	close(fd);
 	transfer_content_to_struct(path, height, map);
-	clean_new_lines(map);
 }
