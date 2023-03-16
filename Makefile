@@ -6,7 +6,7 @@
 #    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/15 18:36:23 by tgrasset         ###   ########.fr        #
+#    Updated: 2023/03/16 10:57:46 by tgrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS	=	./main.c \
 			./parsing/char_check_texture_paths.c \
 			./parsing/extract_content.c \
 			./parsing/get_rgb.c \
+			./parsing/closed_map_check.c \
 			./minilibx_functions.c \
 			./hooks.c \
 				

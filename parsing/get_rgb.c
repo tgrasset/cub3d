@@ -6,37 +6,14 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:30:27 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/15 17:52:16 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:46:54 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	set_default_colour(t_map *map, char c)
+void	fill_value_tab(char *val, char *str, int i)
 {
-	if (c == 'F')
-	{
-		map->floor[0] = 124;
-		map->floor[1] = 252;
-		map->floor[2] = 0;
-	}
-	else if (c == 'C')
-	{
-		map->ceiling[0] = 135;
-		map->ceiling[1] = 206;
-		map->ceiling[2] = 235;
-	}
-}
-
-void	add_value(char *val, char *str, t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (ft_isdigit(str[i]))
-		i++;
-	if (i > 3 || i == 0)
-		parse_error(4, map);
 	val[0] = str[0];
 	if (i == 1)
 		val[1] = '\0';
@@ -51,8 +28,34 @@ void	add_value(char *val, char *str, t_map *map)
 		val[2] = str[2];
 		val[3] = '\0';
 	}
+}
+
+void	add_value(char *val, char *str, t_map *map, int end_flag)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str[i] == '0')
+		i++;
+	if (i != 0 && ft_isdigit(str[i] == 0))
+		i--;
+	j = i;
+	while (ft_isdigit(str[i]))
+		i++;
+	if (i - j > 3 || i == 0)
+		parse_error(4, map);
+	fill_value_tab(val, &str[j], j);
 	if (ft_atoi(val) > 255)
 		parse_error(4, map);
+	if (end_flag == 1)
+	{
+		i = 0;
+		while (ft_isdigit(str[i]) || str[i] == ' ')
+			i++;
+		if (str[i] != '\0')
+			parse_error(4, map);
+	}
 }
 
 void	assign_red_green_values(t_map *map, char c, char *r, char *g)
@@ -85,7 +88,7 @@ void	set_rgb_values(t_map *map, char c, char *str, int i)
 
 	while (str[i] == ' ')
 		i++;
-	add_value(r, &str[i], map);
+	add_value(r, &str[i], map, 0);
 	while (ft_isdigit(str[i]) || str[i] == ' ')
 		i++;
 	if (str[i] != ',')
@@ -93,7 +96,7 @@ void	set_rgb_values(t_map *map, char c, char *str, int i)
 	i++;
 	while (str[i] == ' ')
 		i++;
-	add_value(g, &str[i], map);
+	add_value(g, &str[i], map, 0);
 	while (ft_isdigit(str[i]) || str[i] == ' ')
 		i++;
 	if (str[i] != ',')
@@ -101,7 +104,7 @@ void	set_rgb_values(t_map *map, char c, char *str, int i)
 	i++;
 	while (str[i] == ' ')
 		i++;
-	add_value(b, &str[i], map);
+	add_value(b, &str[i], map, 1);
 	assign_red_green_values(map, c, r, g);
 	assign_blue_value(map, c, b);
 }

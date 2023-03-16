@@ -6,11 +6,27 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:50:12 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/15 18:04:16 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 11:02:55 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
+
+void	set_default_colour(t_map *map, char c)
+{
+	if (c == 'F')
+	{
+		map->floor[0] = 124;
+		map->floor[1] = 252;
+		map->floor[2] = 0;
+	}
+	else if (c == 'C')
+	{
+		map->ceiling[0] = 135;
+		map->ceiling[1] = 206;
+		map->ceiling[2] = 235;
+	}
+}
 
 void	get_colour(char **content, t_map *map, int i, char c)
 {
@@ -74,11 +90,6 @@ void	assign_struct_values(t_map *map)
 	get_colour(map->content, map, 0, 'C');
 }
 
-// void	closed_map_check(char **grid, t_map *map, int x, int y)
-// {
-
-// }
-
 void	parse_cub_file(int ac, char *path, t_map *map)
 {
 	init_map_structure(map);
@@ -89,5 +100,5 @@ void	parse_cub_file(int ac, char *path, t_map *map)
 	extract_cub_file_content(path, map);
 	grid_char_check(map->content, map, 0, 0);
 	assign_struct_values(map);
-	// closed_map_check(map->grid, map, 0, 1);
+	closed_map_check(map->grid, map, 0, 1);
 }
