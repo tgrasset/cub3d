@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:50:12 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 11:02:55 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:04:31 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ void	parse_cub_file(int ac, char *path, t_map *map)
 	grid_char_check(map->content, map, 0, 0);
 	assign_struct_values(map);
 	closed_map_check(map->grid, map, 0, 1);
+	default_textures_paths_if_necessary(map);
 }
