@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:57:35 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/15 17:59:50 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:33:13 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	parse_error(int n, t_map *map)
 	else if (n == 4)
 		ft_putendl_fd("Error\ncub file content invalid", 2);
 	else if (n == 5)
-		ft_putendl_fd("Error\nMalloc couldn't allocate memory", 2);
+		ft_putendl_fd("Error\nEmpty cub file or malloc failed", 2);
 	else if (n == 6)
 		ft_putendl_fd("Error\nThe map must be closed with walls", 2);
 	free_map(map);
