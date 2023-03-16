@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 13:04:54 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:54:59 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void	grid_char_check(char **c, t_map *map, int i, int j);
 char	*get_texture_path(char **content, char *dir, int i, t_map *map);
 void	closed_map_check(char **grid, t_map *map, int x, int y);
 void	default_textures_paths_if_necessary(t_map *map);
+void	check_if_directory(char *path, t_map *map, int fd);
 
 #endif

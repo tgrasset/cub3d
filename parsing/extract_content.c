@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:26:24 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 13:32:20 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:54:31 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	extract_cub_file_content(char *path, t_map *map)
 	char	*line;
 
 	height = 0;
+	check_if_directory(path, map, 0);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		parse_error(3, map);

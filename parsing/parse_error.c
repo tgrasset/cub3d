@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:57:35 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 13:33:13 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/16 13:55:08 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,18 @@ void	parse_error(int n, t_map *map)
 		ft_putendl_fd("Error\nEmpty cub file or malloc failed", 2);
 	else if (n == 6)
 		ft_putendl_fd("Error\nThe map must be closed with walls", 2);
+	else if (n == 7)
+		ft_putendl_fd("Error\nThis path leads to a directory", 2);
 	free_map(map);
 	exit(1);
+}
+
+void	check_if_directory(char *path, t_map *map, int fd)
+{
+	fd = open(path, O_DIRECTORY);
+	if (fd > 0)
+	{
+		close(fd);
+		parse_error(7, map);
+	}
 }
