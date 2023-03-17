@@ -17,11 +17,11 @@ int map[]=
 {
     1,1,1,1,1,1,1,1,
     1,0,1,0,0,0,0,1,
-    1,0,1,0,0,0,0,1,
-    1,0,0,0,0,0,0,1,
-    1,0,0,0,0,0,0,1,
+    1,0,1,1,0,0,0,1,
+    1,0,0,1,0,0,0,1,
     1,0,0,0,0,0,0,1,
     1,0,0,0,0,1,0,1,
+    1,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,
 };
 
@@ -60,13 +60,21 @@ float dist(float ax,float ay, float bx, float by)
 
 void	draw_ray(t_game *game)
 {
-	int	r, mx, my, mp, dof; float rx, ry, ra, xo, yo;
+	int	r, mx, my, mp, dof; float rx, ry, ra, xo, yo, distance;
 	float dis_h=1000000, hx = game->player_x, hy = game->player_y;
 	float dis_v=1000000, vx = game->player_x, vy = game->player_y;
 
-	ra = game->player_angle;
+	ra = game->player_angle - DR * 30;
+	if (ra < 0)
+	{
+		ra += 2 * PI;
+	}
+	if (ra > 2 * PI)
+	{
+		ra -= 2 * PI;
+	}
 	r = 0;
-	while(r < 1) // on ne cast qu'un seul ray pour l'instant
+	while (r < 60) // on ne cast qu'un seul ray pour l'instant
 	{
 		//checker les lignes horizontales
 		dof = 0;
@@ -152,20 +160,24 @@ void	draw_ray(t_game *game)
 				dof++;
 			}
 		}
+		int color = 0;
 		if (dis_v < dis_h)
 		{
 			rx = vx;
 			ry = vy;
+			distance = dis_v;
+			color = 1;
 		}
 		if (dis_v > dis_h)
 		{
 			rx = hx;
 			ry = hy;
+			distance = dis_h;
+			color = 0;
 		}
 		mx = (int)(rx)>>6;
 		my = (int)(ry)>>6;
 		mp = my * mapSize + mx;
-		printf("found wall at x:%d y:%d\n", mx,my);
 		if (mp < mapSize*mapSize)
 		{
 			int i = ry;
@@ -183,8 +195,55 @@ void	draw_ray(t_game *game)
 			}
 		}
 		r++;
+		draw_three_d(game, distance, r, ra, color);
+		ra += DR;
+		if (ra < 0)
+		{
+			ra += 2 * PI;
+		}
+		if (ra > 2 * PI)
+		{
+			ra -= 2 * PI;
+		}
 	}
 
+}
+
+void	draw_three_d(t_game *game, float distance, int r, float ra, int color)
+{
+	int	j;
+	int	cpt;
+	float	height;
+	float	offset;
+	float	plan_fisheye;
+
+	plan_fisheye = game->player_angle - ra;
+	if (plan_fisheye < 0)
+		plan_fisheye += 2 * PI;
+	if (plan_fisheye > 2 * PI)
+		plan_fisheye -= 2 * PI;
+	distance = distance * cos(plan_fisheye);
+	height = (mapSize * 2 * 320) / distance;
+	if (height > 320)
+		height = 320;
+	offset = 160 - height / 2;
+	cpt = 0;
+	j = offset;
+	while (cpt < 8)
+	{
+		while (j < height + offset)
+		{
+			if (color)
+				pixel_put(game->img, j, (530 + r * 8) + cpt,
+					0x00002888);
+			else
+				pixel_put(game->img, j, (530 + r * 8) + cpt,
+					0x80090888);
+			j++;
+		}
+		j = offset;
+		cpt++;
+	}
 }
 
 void	add_to_image(t_game *game)

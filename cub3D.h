@@ -29,6 +29,7 @@
 # define PI 3.1415926535
 # define P2 PI/2
 # define P3 3*PI/2
+# define DR 0.0174533 // 1 degre = DR radians
 
 typedef struct  s_map
 {
@@ -75,6 +76,7 @@ void	add_to_image(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	draw_ray(t_game *game);
+void	draw_three_d(t_game *game, float distance, int r, float ra, int color);
 void	pixel_put(t_data *data, int x, int y, int color);
 
 //hooks
