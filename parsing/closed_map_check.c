@@ -12,6 +12,31 @@
 
 #include "../cub3D.h"
 
+void	get_player_info(char **grid, t_map *map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (grid[y] != NULL)
+	{
+		x = 0;
+		while (grid[y][x] != '\0')
+		{
+			if (grid[y][x] == 'N' || grid[y][x] == 'S'
+			|| grid[y][x] == 'W' || grid[y][x] == 'E')
+			{
+				map->p_dir = grid[y][x];
+				grid[y][x] = '0';
+				map->p_x = x;
+				map->p_y = y;
+			}
+			x++;
+		}
+		y++;
+	}
+}
+
 int	out_of_map(char c)
 {
 	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W' && c != 'E')
@@ -50,4 +75,5 @@ void	closed_map_check(char **grid, t_map *map, int x, int y)
 			parse_error(6, map);
 		x++;
 	}
+	get_player_info(grid, map);
 }

@@ -34,6 +34,9 @@ typedef struct  s_map
     unsigned char   floor[3];
     unsigned char   ceiling[3];
     char            **content;
+	int				p_x;
+	int				p_y;
+	char			p_dir;
     int             grid_start;
     char            **grid;
 }               t_map;
