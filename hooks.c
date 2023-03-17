@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/14 15:19:13 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/17 17:08:31 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ int	hook_slide(int keycode, t_game *game)
 	}
 	else if (keycode == 65364)
 	{
-		game->player_x += game->player_deltax;
-		game->player_y += game->player_deltay;
+		game->player_x -= game->player_deltax;
+		game->player_y -= game->player_deltay;
 	}
 	else if (keycode == 65362)
 	{
-		game->player_x -= game->player_deltax;
-		game->player_y -= game->player_deltay;
+		game->player_x += game->player_deltax;
+		game->player_y += game->player_deltay;
 	}
 	add_to_image(game);
 	return (keycode);
