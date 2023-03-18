@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/18 23:10:39 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/18 23:29:18 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,7 @@ void	draw_ray(t_game *game)
 		pick_v_or_h(game, pix);
 		draw_minimap_dot(game);
 		game->store->r++;
-		draw_three_d(game, game->store->distance, game->store->r,
-			game->store->ra, game->store->color);
+		draw_three_d(game, game->store->distance, game->store->ra);
 		game->store->ra += DR;
 		if (game->store->ra < 0)
 		{

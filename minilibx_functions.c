@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/17 23:24:25 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/18 23:28:46 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,32 @@ float	dist(float ax, float ay, float bx, float by)
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
-void	draw_three_d(t_game *game, float distance, int r, float ra, int color)
+void	loop_draw_three_d(t_game *game, float height, float offset)
 {
-	int	j;
-	int	cpt;
+	int		cpt;
+	int		j;
+
+	j = offset;
+	cpt = 0;
+	while (cpt < 8)
+	{
+		while (j < height + offset)
+		{
+			if (game->store->color)
+				pixel_put(game->img, j, (530 + game->store->r * 8) + cpt,
+					0x00002888);
+			else
+				pixel_put(game->img, j, (530 + game->store->r * 8) + cpt,
+					0x80090888);
+			j++;
+		}
+		j = offset;
+		cpt++;
+	}
+}
+
+void	draw_three_d(t_game *game, float distance, float ra)
+{
 	float	height;
 	float	offset;
 	float	plan_fisheye;
@@ -77,23 +99,7 @@ void	draw_three_d(t_game *game, float distance, int r, float ra, int color)
 	if (height > 320)
 		height = 320;
 	offset = 160 - height / 2;
-	cpt = 0;
-	j = offset;
-	while (cpt < 8)
-	{
-		while (j < height + offset)
-		{
-			if (color)
-				pixel_put(game->img, j, (530 + r * 8) + cpt,
-					0x00002888);
-			else
-				pixel_put(game->img, j, (530 + r * 8) + cpt,
-					0x80090888);
-			j++;
-		}
-		j = offset;
-		cpt++;
-	}
+	loop_draw_three_d(game, height, offset);
 }
 
 void	add_to_image(t_game *game)

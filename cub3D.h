@@ -97,7 +97,7 @@ void	init_mlx(t_game *game);
 void	add_to_image(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
-void	draw_three_d(t_game *game, float distance, int r, float ra, int color);
+void	draw_three_d(t_game *game, float distance, float ra);
 void	pixel_put(t_data *data, int x, int y, int color);
 float	dist(float ax, float ay, float bx, float by);
 
