@@ -20,6 +20,7 @@ SRCS	=	./main.c \
 			./parsing/extract_content.c \
 			./parsing/get_rgb.c \
 			./parsing/closed_map_check.c \
+			./parsing_utils.c \
 			./minilibx_functions.c \
 			./hooks.c \
 				

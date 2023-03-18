@@ -85,5 +85,7 @@ char	*get_texture_path(char **content, char *dir, int i, t_map *map);
 void	closed_map_check(char **grid, t_map *map, int x, int y);
 void	default_textures_paths_if_necessary(t_map *map);
 void	check_if_directory(char *path, t_map *map, int fd);
+int		skip_spaces(char *str, int i);
+void    useless_lines_check(char **content, t_map *map, int i);
 
 #endif

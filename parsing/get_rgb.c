@@ -86,24 +86,23 @@ void	set_rgb_values(t_map *map, char c, char *str, int i)
 	char	g[4];
 	char	b[4];
 
-	while (str[i] == ' ')
-		i++;
+	i = skip_spaces(str, i);
+	i++;
+	i = skip_spaces(str, i);
 	add_value(r, &str[i], map, 0);
 	while (ft_isdigit(str[i]) || str[i] == ' ')
 		i++;
 	if (str[i] != ',')
 		parse_error(4, map);
 	i++;
-	while (str[i] == ' ')
-		i++;
+	i = skip_spaces(str, i);
 	add_value(g, &str[i], map, 0);
 	while (ft_isdigit(str[i]) || str[i] == ' ')
 		i++;
 	if (str[i] != ',')
 		parse_error(4, map);
 	i++;
-	while (str[i] == ' ')
-		i++;
+	i = skip_spaces(str, i);
 	add_value(b, &str[i], map, 1);
 	assign_red_green_values(map, c, r, g);
 	assign_blue_value(map, c, b);

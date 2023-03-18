@@ -31,7 +31,9 @@ void	set_default_colour(t_map *map, char c)
 void	get_colour(char **content, t_map *map, int i, char c)
 {
 	int	j;
+	int	f;
 
+	f = -1;
 	while (content[i] != NULL)
 	{
 		j = 0;
@@ -39,20 +41,17 @@ void	get_colour(char **content, t_map *map, int i, char c)
 		{
 			while (content[i][j] == ' ')
 				j++;
-			if (content[i][j] != c)
-			{
-				i++;
-				continue ;
-			}
-			if (content[i][j + 1] == ' ')
-				break ;
+			if (f < 0 && content[i][j] == c && content[i][j + 1] == ' ')
+				f = i ;
+			else if (f >= 0 && content[i][j] == c && content[i][j + 1] == ' ')
+				parse_error(4, map);
 		}
 		i++;
 	}
-	if (content[i] == NULL)
+	if (f < 0)
 		set_default_colour(map, c);
 	else
-		set_rgb_values(map, c, content[i], j + 1);
+		set_rgb_values(map, c, content[f], 0);
 }
 
 void	get_map_grid(t_map *map)
@@ -88,6 +87,7 @@ void	assign_struct_values(t_map *map)
 	map->east = get_texture_path(map->content, "EA", 0, map);
 	get_colour(map->content, map, 0, 'F');
 	get_colour(map->content, map, 0, 'C');
+	useless_lines_check(map->content, map, 0);
 }
 
 void	parse_cub_file(int ac, char *path, t_map *map)
