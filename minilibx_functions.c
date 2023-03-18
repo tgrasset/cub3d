@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/17 17:26:33 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/17 23:24:25 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int map[]=
     1,0,0,0,0,0,0,1,
     1,1,1,1,1,1,1,1,
 };
+int	window_size = 512;
 
 void	pixel_put(t_data *data, int x, int y, int color)
 {
@@ -53,160 +54,9 @@ void	draw_player(t_game *game)
 	}
 }
 
-float dist(float ax,float ay, float bx, float by)
+float	dist(float ax, float ay, float bx, float by)
 {
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
-}
-
-void	draw_ray(t_game *game)
-{
-	int	r, mx, my, mp, dof; float rx, ry, ra, xo, yo, distance;
-	float dis_h=1000000, hx = game->player_x, hy = game->player_y;
-	float dis_v=1000000, vx = game->player_x, vy = game->player_y;
-
-	ra = game->player_angle - DR * 30;
-	if (ra < 0)
-	{
-		ra += 2 * PI;
-	}
-	if (ra > 2 * PI)
-	{
-		ra -= 2 * PI;
-	}
-	r = 0;
-	while (r < 60) // on ne cast qu'un seul ray pour l'instant
-	{
-		//checker les lignes horizontales
-		dof = 0;
-		float a_tan = -1/tan(ra);
-		if (ra > PI)
-		{
-			ry = (((int)game->player_y>>6)<<6) - 0.0001;
-			rx = (game->player_y - ry) * a_tan + game->player_x;
-			yo = -64;
-			xo = -yo * a_tan;
-		}
-		if (ra < PI)
-		{
-			ry = (((int)game->player_y>>6)<<6) + 64;
-			rx = (game->player_y - ry) * a_tan + game->player_x;
-			yo = 64;
-			xo = -yo * a_tan;
-		}
-		if (ra == PI || ra == 0)
-		{
-			rx = game->player_x;
-			ry = game->player_y;
-			dof = 8;
-		}
-		while (dof < 8)
-		{
-			mx = (int)(rx)>>6;
-			my = (int)(ry)>>6;
-			mp = my * mapSize + mx;
-			if (mp > 0 && mp < mapSize*mapSize && map[mp] == 1)
-			{
-				hx = rx;
-				hy = ry;
-				dis_h = dist(game->player_x, game->player_y, hx, hy);
-				dof = 8;
-			}
-			else
-			{
-				rx+=xo;
-				ry+=yo;
-				dof++;
-			}
-		}
-		//checker les lignes verticales
-		dof = 0;
-		float n_tan = -tan(ra);
-		if (ra > P2 && ra < P3)
-		{
-			rx = (((int)game->player_x>>6)<<6) - 0.0001;
-			ry = (game->player_x - rx) * n_tan + game->player_y;
-			xo = -64;
-			yo = -xo * n_tan;
-		}
-		if (ra < P2 || ra > P3)
-		{
-			rx = (((int)game->player_x>>6)<<6) + 64;
-			ry = (game->player_x - rx) * n_tan + game->player_y;
-			xo = 64;
-			yo = -xo * n_tan;
-		}
-		if (ra == PI || ra == 0)
-		{
-			rx = game->player_x;
-			ry = game->player_y;
-			dof = 8;
-		}
-		while (dof < 8)
-		{
-			mx = (int)(rx)>>6;
-			my = (int)(ry)>>6;
-			mp = my * mapSize + mx;
-			if (mp > 0 && mp < mapSize*mapSize && map[mp] == 1)
-			{
-				vx = rx;
-				vy = ry;
-				dis_v = dist(game->player_x, game->player_y, vx, vy);
-				dof = 8;
-			}
-			else
-			{
-				rx+=xo;
-				ry+=yo;
-				dof++;
-			}
-		}
-		int color = 0;
-		if (dis_v < dis_h)
-		{
-			rx = vx;
-			ry = vy;
-			distance = dis_v;
-			color = 1;
-		}
-		if (dis_v > dis_h)
-		{
-			rx = hx;
-			ry = hy;
-			distance = dis_h;
-			color = 0;
-		}
-		mx = (int)(rx)>>6;
-		my = (int)(ry)>>6;
-		mp = my * mapSize + mx;
-		if (mp < mapSize*mapSize)
-		{
-			int i = ry;
-			int j = rx;
-			while (i < ry + 2)
-			{
-				while (j < rx + 2)
-				{
-					pixel_put(game->img, i, j,
-						0x80090888);
-					j++;
-				}
-				j = rx;
-				i++;
-			}
-		}
-		r++;
-		draw_three_d(game, distance, r, ra, color);
-		ra += DR;
-		if (ra < 0)
-		{
-			ra += 2 * PI;
-		}
-		if (ra > 2 * PI)
-		{
-			ra -= 2 * PI;
-		}
-	}
-
 }
 
 void	draw_three_d(t_game *game, float distance, int r, float ra, int color)

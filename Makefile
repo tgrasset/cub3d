@@ -6,14 +6,14 @@
 #    By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/14 15:35:21 by ael-youb         ###   ########.fr        #
+#    Updated: 2023/03/18 23:07:44 by ael-youb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ################################################################################
 ########### VARIABLES
 
-SRCS	=	./main.c minilibx_functions.c hooks.c\
+SRCS	=	./main.c minilibx_functions.c hooks.c raycasting.c raycasting_utils.c\
 				
 OBJS	=	$(SRCS:%.c=%.o)
 
