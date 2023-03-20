@@ -24,6 +24,8 @@ SRCS	=	./main.c \
 			./parsing/copy_and_format_map.c \
 			./minilibx_functions.c \
 			./hooks.c \
+      ./raycasting.c \
+      ./raycasting_utils.c \
 				
 OBJS	=	$(SRCS:%.c=%.o)
 
