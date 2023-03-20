@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 18:03:42 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:18:46 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,8 +184,7 @@ void	init_mlx(t_game *game)
 	game->img = &img;
 	add_to_image(game);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, game->img->img, 0, 0);
-	//mlx_key_hook(win.mlx_win, hook_slide, game);
-	mlx_hook(win.mlx_win, 2, 1L<<0, hook_slide, game);
+	mlx_hook(win.mlx_win, 2, 1L << 0, hook_slide, game);
 	mlx_hook(win.mlx_win, 17, 0L, destroy_window, game);
 	mlx_loop(win.mlx);
 }
