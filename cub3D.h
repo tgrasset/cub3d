@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 13:54:59 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:56:34 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct  s_map
     unsigned char   floor[3];
     unsigned char   ceiling[3];
     char            **content;
+	int				grid_height;
+	int				grid_width;
 	int				p_x;
 	int				p_y;
 	char			p_dir;
@@ -87,5 +89,6 @@ void	default_textures_paths_if_necessary(t_map *map);
 void	check_if_directory(char *path, t_map *map, int fd);
 int		skip_spaces(char *str, int i);
 void    useless_lines_check(char **content, t_map *map, int i);
+void	copy_map_grid(char **src, t_map *map, int i, int j);
 
 #endif
