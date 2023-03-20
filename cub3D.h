@@ -31,7 +31,7 @@
 # define DR 0.0174533 // 1 degre = DR radians
 
 typedef struct  s_map
-
+{
     char            *north;
     char            *south;
     char            *east;
