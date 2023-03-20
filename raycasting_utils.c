@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/18 23:10:10 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:39:39 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	pick_v_or_h(t_game *game, int pix)
 	}
 	game->store->mx = (int)(game->store->rx) / pix;
 	game->store->my = (int)(game->store->ry) / pix;
-	game->store->mp = game->store->my * mapSize + game->store->mx;
+	game->store->mp = game->store->my * game->map.grid_height + game->store->mx;
 }
 
 void	init_draw_ray(t_game *game)
@@ -63,16 +63,19 @@ void	init_draw_ray(t_game *game)
 
 void	draw_minimap_dot(t_game *game)
 {
-	if (game->store->mp < mapSize * mapSize)
-	{
-		int i = game->store->ry;
-		int j = game->store->rx;
+	int	i;
+	int	j;
+
+	if (game->store->mp < game->map.grid_height * game->map.grid_height)
+	{	
+		j = game->store->rx;
+		i = game->store->ry;
 		while (i < game->store->ry + 2)
 		{
 			while (j < game->store->rx + 2)
 			{
 				pixel_put(game->img, i, j,
-							0x80090888);
+					0x80090888);
 				j++;
 			}
 			j = game->store->rx;

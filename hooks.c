@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/18 23:31:06 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/20 15:49:29 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	close_program(t_game *game)
 	mlx_destroy_display(game->win->mlx);
 	free(game->win->mlx);
 	free(game->store);
-	free(game);
+	free_map(&game->map);
+	//free(game);
+
 	exit(1);
 }

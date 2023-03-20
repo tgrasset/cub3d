@@ -30,23 +30,23 @@
 # define P3 3*PI/2
 # define DR 0.0174533 // 1 degre = DR radians
 
-typedef struct  s_map
+typedef struct s_map
 {
-    char            *north;
-    char            *south;
-    char            *east;
-    char            *west;
-    unsigned char   floor[3];
-    unsigned char   ceiling[3];
-    char            **content;
+	char			*north;
+	char			*south;
+	char			*east;
+	char			*west;
+	unsigned char	floor[3];
+	unsigned char	ceiling[3];
+	char			**content;
 	int				grid_height;
 	int				grid_width;
-	int             grid_start;
-	char            **grid;
+	int				grid_start;
+	char			**grid;
 	int				p_x;
 	int				p_y;
 	char			p_dir;
-}               t_map;
+}				t_map;
 
 typedef struct s_data {
 	void			*img;
@@ -85,7 +85,7 @@ typedef struct s_raystorage
 
 typedef struct s_game
 {
-	t_map			*map;
+	t_map			map;
 	t_vars			*win;
 	t_data			*img;
 	float			player_x;

@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/18 23:28:46 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/20 16:30:56 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void	draw_player(t_game *game)
 
 	i = game->player_y;
 	j = game->player_x;
-	while (i < game->player_y + 10)
+	while (i < game->player_y + 5)
 	{
-		while (j < game->player_x + 10)
+		while (j < game->player_x + 5)
 		{
 			pixel_put(game->img, i, j,
 				0x80090888);
@@ -132,23 +132,24 @@ void	draw_map(t_game *game)
 	int	y;
 	int	xo;
 	int	yo;
-	//int	color;
+	int	pix;
 
 	x = 0;
 	y = 0;
-	while (x < mapSize)
+	pix = window_size / game->map.grid_width;
+	while (x < game->map.grid_width)
 	{
-		while (y < mapSize)
+		while (y < game->map.grid_width)
 		{
-			xo = x * 64;
-			yo = y * 64;
-			while (xo < ((x + 1) * 64) - 1) // 10px offset entre chaque case
+			xo = x * pix;
+			yo = y * pix;
+			while (xo < ((x + 1) * pix) - 1) // 10px offset entre chaque case
 			{
-				while (yo < ((y + 1) * 64) - 1)
+				while (yo < ((y + 1) * pix) - 1)
 				{
 					pixel_put(game->img, yo, xo,
 						0x00000000);
-					if (map[y*mapSize+x] == 1)
+					if (game->map.grid[x][y] == '1')
 					{
 						pixel_put(game->img, yo, xo,
 							0x88800000);
@@ -160,7 +161,7 @@ void	draw_map(t_game *game)
 					}
 					yo++;
 				}
-				yo = y * 64;
+				yo = y * pix;
 				xo++;
 			}
 			y++;
