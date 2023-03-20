@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:26:24 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 15:00:41 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/20 09:47:32 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_map_structure(t_map *map)
 	map->ceiling[1] = 0;
 	map->ceiling[2] = 0;
 	map->grid_start = 0;
+	map->grid_height = 0;
+	map->grid_width = 0;
 }
 
 int	is_valid_extension(char *path)

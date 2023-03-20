@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:50:12 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 14:17:56 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/20 10:21:41 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,16 @@ void	get_map_grid(t_map *map)
 
 	i = map->grid_start;
 	while (map->content[i] != NULL)
-		i++;
-	map->grid = malloc(sizeof(char *) * (i - map->grid_start + 1));
-	if (map->grid == NULL)
-		parse_error(5, map);
-	i = map->grid_start;
-	j = 0;
-	while (map->content[i] != NULL)
 	{
-		map->grid[j] = ft_strdup(map->content[i]);
-		if (map->grid[j] == NULL)
-			parse_error(5, map);
+		j = 0;
+		while (map->content[i][j] != '\0')
+			j++;
+		if (j > map->grid_width)
+			map->grid_width = j;
 		i++;
-		j++;
 	}
-	map->grid[j] = NULL;
+	map->grid_height = i - map->grid_start;
+	copy_map_grid(&map->content[map->grid_start], map, 0, 0);
 }
 
 void	assign_struct_values(t_map *map)

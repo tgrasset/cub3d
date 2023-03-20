@@ -6,7 +6,7 @@
 #    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/18 23:07:44 by ael-youb         ###   ########.fr        #
+#    Updated: 2023/03/20 10:59:04 by tgrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRCS	=	./main.c \
 			./parsing/extract_content.c \
 			./parsing/get_rgb.c \
 			./parsing/closed_map_check.c \
-			./parsing_utils.c \
+			./parsing/parsing_utils.c \
+			./parsing/copy_and_format_map.c \
 			./minilibx_functions.c \
 			./hooks.c \
       ./raycasting.c \
