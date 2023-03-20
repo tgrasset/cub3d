@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 16:49:32 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:14:02 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ extern int window_size;
 //attention, y et x inverses dans map
 void	loop_distance_h(t_game *game, int pix)
 {
-	while (game->store->dof < 5)
+	while (game->store->dof < 8)
 	{
 		game->store->mx = (int)(game->store->rx) / pix;
 		game->store->my = (int)(game->store->ry) / pix;
@@ -27,14 +27,13 @@ void	loop_distance_h(t_game *game, int pix)
 			* game->map.grid_height + game->store->mx;
 		if (game->store->mp > 0
 			&& game->store->mp < game->map.grid_height * game->map.grid_height
-			&& game->map.grid[game->store->my][game->store->mx] == 1)
+			&& game->map.grid[game->store->my][game->store->mx] == '1')
 		{
 			game->store->hx = game->store->rx;
 			game->store->hy = game->store->ry;
 			game->store->dis_h = dist(game->player_x, game->player_y,
 					game->store->hx, game->store->hy);
 			game->store->dof = 8;
-			printf("wall found horiz at [%d;%d]\n",(int)(game->store->rx) / pix, (int)(game->store->ry) / pix);
 		}
 		else
 		{
@@ -76,7 +75,7 @@ void	distance_h(t_game *game, int pix)
 
 void	loop_distance_v(t_game *game, int pix)
 {
-	while (game->store->dof < 5)
+	while (game->store->dof < 8)
 	{
 		game->store->mx = (int)(game->store->rx) / pix;
 		game->store->my = (int)(game->store->ry) / pix;
@@ -84,7 +83,7 @@ void	loop_distance_v(t_game *game, int pix)
 			* game->map.grid_height + game->store->mx;
 		if (game->store->mp > 0
 			&& game->store->mp < game->map.grid_height * game->map.grid_height
-			&& game->map.grid[game->store->my][game->store->mx] == 1)
+			&& game->map.grid[game->store->my][game->store->mx] == '1')
 		{
 			game->store->vx = game->store->rx;
 			game->store->vy = game->store->ry;
@@ -143,7 +142,7 @@ void	draw_ray(t_game *game)
 		pick_v_or_h(game, pix);
 		draw_minimap_dot(game);
 		game->store->r++;
-		//draw_three_d(game, game->store->distance, game->store->ra);
+		draw_three_d(game, game->store->distance, game->store->ra);
 		game->store->ra += DR;
 		if (game->store->ra < 0)
 		{

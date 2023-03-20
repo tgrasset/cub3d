@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 16:30:56 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:03:42 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,16 +147,16 @@ void	draw_map(t_game *game)
 			{
 				while (yo < ((y + 1) * pix) - 1)
 				{
-					pixel_put(game->img, yo, xo,
+					pixel_put(game->img, xo, yo,
 						0x00000000);
 					if (game->map.grid[x][y] == '1')
 					{
-						pixel_put(game->img, yo, xo,
+						pixel_put(game->img, xo, yo,
 							0x88800000);
 					}
 					else
 					{
-						pixel_put(game->img, yo, xo,
+						pixel_put(game->img, xo, yo,
 							0x99999999);
 					}
 					yo++;

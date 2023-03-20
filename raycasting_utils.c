@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 16:39:39 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/20 18:09:59 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	draw_minimap_dot(t_game *game)
 	int	i;
 	int	j;
 
-	if (game->store->mp < game->map.grid_height * game->map.grid_height)
+	if (game->store->mp < game->map.grid_height * game->map.grid_height
+		&& game->store->mx > 0 && game->store->my > 0)
 	{	
 		j = game->store->rx;
 		i = game->store->ry;
