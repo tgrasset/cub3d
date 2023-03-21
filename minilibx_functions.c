@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 15:53:51 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:21:06 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	{
 		while (j < height + offset)
 		{
-			if (game->store->color)
-				pixel_put(game->img, j, (530 + game->store->r) + cpt,
+			if (game->store.color)
+				pixel_put(game->img, j, (530 + game->store.r) + cpt,
 					0x00002888);
 			else
-				pixel_put(game->img, j, (530 + game->store->r) + cpt,
+				pixel_put(game->img, j, (530 + game->store.r) + cpt,
 					0x80090888);
 			j++;
 		}

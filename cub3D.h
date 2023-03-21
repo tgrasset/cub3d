@@ -99,7 +99,7 @@ typedef struct s_game
 	float			player_deltax;
 	float			player_deltay;
 	float			player_angle;
-	t_raystorage	*store;
+	t_raystorage	store;
 }				t_game;
 
 //minilibx_functions

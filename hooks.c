@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 15:39:20 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:17:20 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,16 @@ void	close_program(t_game *game)
 {
 	mlx_destroy_window(game->win->mlx, game->win->mlx_win);
 	mlx_destroy_image(game->win->mlx, game->img->img);
-	mlx_destroy_image(game->win->mlx, game->north.img);
-	mlx_destroy_image(game->win->mlx, game->south.img);
-	mlx_destroy_image(game->win->mlx, game->east.img);
-	mlx_destroy_image(game->win->mlx, game->west.img);
+	if (game->north.img != NULL)
+		mlx_destroy_image(game->win->mlx, game->north.img);
+	if (game->south.img != NULL)
+		mlx_destroy_image(game->win->mlx, game->south.img);
+	if (game->east.img != NULL)
+		mlx_destroy_image(game->win->mlx, game->east.img);
+	if (game->west.img != NULL)
+		mlx_destroy_image(game->win->mlx, game->west.img);
 	mlx_destroy_display(game->win->mlx);
 	free(game->win->mlx);
-	free(game->store);
 	free_map(&game->map);
 	//free(game);
 
