@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 12:01:11 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:39:20 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,12 @@ int	hook_slide(int keycode, t_game *game)
 
 void	close_program(t_game *game)
 {
-	//NB: CLEAN LA MAP ici
 	mlx_destroy_window(game->win->mlx, game->win->mlx_win);
 	mlx_destroy_image(game->win->mlx, game->img->img);
+	mlx_destroy_image(game->win->mlx, game->north.img);
+	mlx_destroy_image(game->win->mlx, game->south.img);
+	mlx_destroy_image(game->win->mlx, game->east.img);
+	mlx_destroy_image(game->win->mlx, game->west.img);
 	mlx_destroy_display(game->win->mlx);
 	free(game->win->mlx);
 	free(game->store);

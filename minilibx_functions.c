@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 11:52:57 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:53:51 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,32 @@ void	draw_map(t_game *game)
 	}
 }
 
+void	load_textures(t_game *game)
+{
+	game->north.img = mlx_xpm_file_to_image(game->win->mlx, game->map.north,
+		&game->north.w, &game->north.h);
+	game->south.img = mlx_xpm_file_to_image(game->win->mlx, game->map.south,
+		&game->south.w, &game->south.h);
+	game->east.img = mlx_xpm_file_to_image(game->win->mlx, game->map.east,
+		&game->east.w, &game->east.h);
+	game->west.img = mlx_xpm_file_to_image(game->win->mlx, game->map.west,
+		&game->west.w, &game->west.h);
+	if (game->north.img == NULL || game->south.img == NULL
+		|| game->east.img == NULL || game->west.img == NULL)
+	{
+		ft_putendl_fd("Error\nOne or more textures couldn't be loaded", 2);
+		close_program(game);
+	}
+	game->north.addr = mlx_get_data_addr(game->north.img, &game->north.bpp,
+		&game->north.ll, &game->north.endian);
+	game->south.addr = mlx_get_data_addr(game->south.img, &game->south.bpp,
+		&game->south.ll, &game->south.endian);
+	game->east.addr = mlx_get_data_addr(game->east.img, &game->east.bpp,
+		&game->east.ll, &game->east.endian);
+	game->west.addr = mlx_get_data_addr(game->west.img, &game->west.bpp,
+		&game->west.ll, &game->west.endian);
+}
+
 void	init_mlx(t_game *game)
 {
 	t_vars	win;
@@ -168,6 +194,7 @@ void	init_mlx(t_game *game)
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.ll, &img.endian);
 	game->win = &win;
 	game->img = &img;
+	load_textures(game);
 	add_to_image(game);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, game->img->img, 0, 0);
 	mlx_hook(win.mlx_win, 2, 1L << 0, hook_slide, game);

@@ -54,6 +54,8 @@ typedef struct s_data {
 	int				bpp;
 	int				ll;
 	int				endian;
+	int				w;
+	int				h;
 }				t_data;
 
 typedef struct s_vars {
@@ -88,6 +90,10 @@ typedef struct s_game
 	t_map			map;
 	t_vars			*win;
 	t_data			*img;
+	t_data			north;
+	t_data			south;
+	t_data			east;
+	t_data			west;
 	float			player_x;
 	float			player_y;
 	float			player_deltax;

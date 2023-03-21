@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 11:42:50 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/21 15:50:11 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	init_draw_ray(t_game *game)
 	game->store->dis_v = 1000000;
 	game->store->vx = game->player_x;
 	game->store->vy = game->player_y;
-
+	
 	game->store->ra = game->player_angle - DR * 30;
 	if (game->store->ra < 0)
 	{
