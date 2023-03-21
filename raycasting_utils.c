@@ -6,15 +6,11 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 18:09:59 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:42:50 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-extern int mapSize;
-extern int map[];
-extern int window_size;
 
 //pick the shorted distance
 void	pick_v_or_h(t_game *game, int pix)
@@ -71,9 +67,9 @@ void	draw_minimap_dot(t_game *game)
 	{	
 		j = game->store->rx;
 		i = game->store->ry;
-		while (i < game->store->ry + 2)
+		while (i < game->store->ry + 1)
 		{
-			while (j < game->store->rx + 2)
+			while (j < game->store->rx + 1)
 			{
 				pixel_put(game->img, i, j,
 					0x80090888);

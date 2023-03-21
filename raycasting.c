@@ -6,15 +6,11 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 18:14:02 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:44:08 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-extern int mapSize;
-extern int map[];
-extern int window_size;
 
 //attention, y et x inverses dans map
 void	loop_distance_h(t_game *game, int pix)
@@ -133,9 +129,9 @@ void	draw_ray(t_game *game)
 {
 	int	pix;
 
-	pix = window_size / game->map.grid_height;
+	pix = 512 / game->map.grid_height;
 	init_draw_ray(game);
-	while (game->store->r < 60)
+	while (game->store->r < 480)
 	{
 		distance_h(game, pix);
 		distance_v(game, pix);
@@ -143,7 +139,7 @@ void	draw_ray(t_game *game)
 		draw_minimap_dot(game);
 		game->store->r++;
 		draw_three_d(game, game->store->distance, game->store->ra);
-		game->store->ra += DR;
+		game->store->ra += (DR / 8);
 		if (game->store->ra < 0)
 		{
 			game->store->ra += 2 * PI;

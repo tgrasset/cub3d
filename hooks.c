@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 15:49:29 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:01:11 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,51 @@ int	destroy_window(t_game *game)
 	return (1);
 }
 
+void	turn_left(t_game *game)
+{
+	game->player_angle -= 0.1;
+	if (game->player_angle < 0)
+		game->player_angle+= 2*PI;
+	game->player_deltax = cos(game->player_angle) * 5;
+	game->player_deltay = sin(game->player_angle) * 5;
+}
+
+void	turn_right(t_game *game)
+{
+	game->player_angle += 0.1;
+	if (game->player_angle > 2*PI)
+		game->player_angle-= 2*PI;
+	game->player_deltax = cos(game->player_angle) * 5;
+	game->player_deltay = sin(game->player_angle) * 5;
+}
+
+void	go_backward(t_game *game)
+{
+	int	mx;
+	int	my;
+
+	mx = (int)game->player_x / game->map.grid_height;
+	my = (int)game->player_y / game->map.grid_height;
+	if (mx < game->map.grid_height && mx > 0)
+	{
+		if (my < game->map.grid_height && my > 0)
+		{
+			printf("%d:%d\n", mx, my);
+			if (!game->map.grid[my][mx])
+			{
+				game->player_x -= game->player_deltax;
+				game->player_y -= game->player_deltay;
+			}
+		}
+	}
+}
+
 int	hook_slide(int keycode, t_game *game)
 {
-	if (keycode == 65361) // left
-	{
-		game->player_angle -= 0.1;
-		if (game->player_angle < 0)
-			game->player_angle+= 2*PI;
-		game->player_deltax = cos(game->player_angle) * 5;
-		game->player_deltay = sin(game->player_angle) * 5;
-	}
-	else if (keycode == 65363) //right
-	{
-		game->player_angle += 0.1;
-		if (game->player_angle > 2*PI)
-			game->player_angle-= 2*PI;
-		game->player_deltax = cos(game->player_angle) * 5;
-		game->player_deltay = sin(game->player_angle) * 5;
-	}
+	if (keycode == 65361)
+		turn_left(game);
+	else if (keycode == 65363)
+		turn_right(game);
 	else if (keycode == 65364)
 	{
 		game->player_x -= game->player_deltax;

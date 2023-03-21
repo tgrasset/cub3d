@@ -6,25 +6,11 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/20 18:18:46 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:52:57 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	mapSize=8;
-int map[]= 
-{
-    1,1,1,1,1,1,1,1,
-    1,0,1,0,0,0,0,1,
-    1,0,1,1,0,0,0,1,
-    1,0,0,1,0,0,0,1,
-    1,0,0,0,0,0,0,1,
-    1,0,0,0,0,1,0,1,
-    1,0,0,0,0,0,0,1,
-    1,1,1,1,1,1,1,1,
-};
-int	window_size = 512;
 
 void	pixel_put(t_data *data, int x, int y, int color)
 {
@@ -66,15 +52,15 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 
 	j = offset;
 	cpt = 0;
-	while (cpt < 8)
+	while (cpt < 1)
 	{
 		while (j < height + offset)
 		{
 			if (game->store->color)
-				pixel_put(game->img, j, (530 + game->store->r * 8) + cpt,
+				pixel_put(game->img, j, (530 + game->store->r) + cpt,
 					0x00002888);
 			else
-				pixel_put(game->img, j, (530 + game->store->r * 8) + cpt,
+				pixel_put(game->img, j, (530 + game->store->r) + cpt,
 					0x80090888);
 			j++;
 		}
@@ -95,10 +81,10 @@ void	draw_three_d(t_game *game, float distance, float ra)
 	if (plan_fisheye > 2 * PI)
 		plan_fisheye -= 2 * PI;
 	distance = distance * cos(plan_fisheye);
-	height = (mapSize * 2 * 320) / distance;
+	height = (8 * 2 * 320) / distance; //bizarre value
 	if (height > 320)
 		height = 320;
-	offset = 160 - height / 2;
+	offset = 200 - height / 2;
 	loop_draw_three_d(game, height, offset);
 }
 
@@ -136,7 +122,7 @@ void	draw_map(t_game *game)
 
 	x = 0;
 	y = 0;
-	pix = window_size / game->map.grid_width;
+	pix = 512 / (game->map.grid_width);
 	while (x < game->map.grid_width)
 	{
 		while (y < game->map.grid_width)
