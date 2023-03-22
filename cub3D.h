@@ -84,8 +84,6 @@ typedef struct s_raystorage
 	float	vx;
 	float	vy;
 	float	distance;
-	int		wall_width;
-	int		wall_ray_nb;
 	int		actual_height;
 }				t_raystorage;
 

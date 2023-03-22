@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/22 18:52:15 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/22 21:21:29 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,16 @@ int	get_colour_from_texture(int height, t_data *data, t_game *game, int wall_y)
 	int	x;
 	int	y;
 	unsigned int res;
-	
-	y = game->store.wall_ray_nb * data->w / game->store.wall_width;
+	float		tmp;
+
+	if (game->store.distance == game->store.dis_h)
+		tmp = game->store.rx / (512 / (game->map.grid_width));
+	else
+		tmp = game->store.ry / (512 / (game->map.grid_width));
+	tmp -= (int)tmp;
+	tmp *= 1000;
+	y = (int)tmp;
+	y = data->w * y / 1000;
 	if (height == game->store.actual_height)
 		x = wall_y * data->h / height;
 	else
