@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/22 15:27:45 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/22 19:09:23 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,14 +134,14 @@ void	draw_rays(t_game *game)
 
 	pix = 512 / game->map.grid_height;
 	init_draw_ray(game);
-	while (game->store.r < 480)
+	while (game->store.r < RAY_NUMBER)
 	{
 		wall_x = game->store.mx;
 		wall_y = game->store.my;
 		wall_start = game->store.r;
 		game->store.wall_ray_nb = 0;
 		game->store.wall_width = 0;
-		while (wall_x == game->store.mx && wall_y == game->store.my)
+		while (game->store.r < RAY_NUMBER && wall_x == game->store.mx && wall_y == game->store.my)
 		{
 			distance_h(game, pix);
 			distance_v(game, pix);
@@ -165,7 +165,7 @@ void	draw_rays(t_game *game)
 				game->store.ra -= 2 * PI;
 			game->store.r--;
 		}
-		while (wall_x == game->store.mx && wall_y == game->store.my)
+		while (game->store.r < RAY_NUMBER && wall_x == game->store.mx && wall_y == game->store.my)
 		{
 			distance_h(game, pix);
 			distance_v(game, pix);

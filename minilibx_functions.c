@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/22 15:41:15 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:52:15 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,18 @@ float	dist(float ax, float ay, float bx, float by)
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
-int	get_colour_from_texture(float height, t_data *data, t_game *game, int wall_y)
+int	get_colour_from_texture(int height, t_data *data, t_game *game, int wall_y)
 {
 	char	*dst;
 	int	x;
 	int	y;
 	unsigned int res;
-
+	
 	y = game->store.wall_ray_nb * data->w / game->store.wall_width;
-	x = wall_y * data->h / height;
+	if (height == game->store.actual_height)
+		x = wall_y * data->h / height;
+	else
+		x = (wall_y + ((game->store.actual_height - height) / 2)) * data->h / game->store.actual_height;
 	dst = data->addr + (x * data->ll + y * (data->bpp /8));
 	res = *(unsigned int *)dst;
 	return (res);
@@ -61,15 +64,27 @@ int	get_colour_from_texture(float height, t_data *data, t_game *game, int wall_y
 
 void	loop_draw_three_d(t_game *game, float height, float offset)
 {
-	int		cpt;
 	int		j;
+	float		px;
+	float		py;
 
+	px = (game->player_x) / (512 / game->map.grid_height);
+	py = (game->player_y) / (512 / game->map.grid_height);
 	j = offset;
-	cpt = 0;
 	while (j < height + offset)
 	{
-		pixel_put(game->img, j, (530 + game->store.r) + cpt,
+		if (game->store.distance == game->store.dis_h && py > game->store.my)
+			pixel_put(game->img, j, 530 + game->store.r,
 			get_colour_from_texture(height, &game->south, game, j - offset));
+		else if (game->store.distance == game->store.dis_h && py < game->store.my)
+			pixel_put(game->img, j, 530 + game->store.r,
+			get_colour_from_texture(height, &game->north, game, j - offset));
+		else if (game->store.distance == game->store.dis_v && px > game->store.mx)
+			pixel_put(game->img, j, 530 + game->store.r,
+			get_colour_from_texture(height, &game->west, game, j - offset));
+		else if (game->store.distance == game->store.dis_v && px < game->store.mx)
+			pixel_put(game->img, j, 530 + game->store.r,
+			get_colour_from_texture(height, &game->east, game, j - offset));
 		j++;
 	}
 }
@@ -87,6 +102,7 @@ void	draw_three_d(t_game *game, float distance, float ra)
 		plan_fisheye -= 2 * PI;
 	distance = distance * cos(plan_fisheye);
 	height = (8 * 2 * 320) / distance; //bizarre value
+	game->store.actual_height = height;
 	if (height > 320)
 		height = 320;
 	offset = 200 - height / 2;
