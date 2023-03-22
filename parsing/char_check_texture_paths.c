@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:28:50 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/21 13:56:26 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/22 21:42:34 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	default_textures_paths_if_necessary(t_map *map)
 {
 	if (map->north == NULL)
-		map->north = ft_strdup("./textures/metal.xpm");
+		map->north = ft_strdup("./textures/red_bricks_dark.xpm");
 	if (map->south == NULL)
-		map->south = ft_strdup("./textures/wood.xpm");
+		map->south = ft_strdup("./textures/red_bricks_bright.xpm");
 	if (map->east == NULL)
 		map->east = ft_strdup("./textures/red_bricks.xpm");
 	if (map->west == NULL)
-		map->west = ft_strdup("./textures/mur_moche.xpm");
+		map->west = ft_strdup("./textures/red_bricks.xpm");
 }
 
 int	grid_first_line(char **content)
