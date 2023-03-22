@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 16:21:06 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:00:07 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,20 @@ float	dist(float ax, float ay, float bx, float by)
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
+int	get_colour_from_texture(float height, t_data *data, int wall_y, int wall_x)
+{
+	char	*dst;
+	int	x;
+	int	y;
+	unsigned int res;
+
+	x = wall_x * data->w / 480;
+	y = wall_y * data->h / height;
+	dst = data->addr + (x * data->ll + y * (data->bpp /8));
+	res = *(unsigned int *)dst;
+	return (res);
+}
+
 void	loop_draw_three_d(t_game *game, float height, float offset)
 {
 	int		cpt;
@@ -52,20 +66,11 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 
 	j = offset;
 	cpt = 0;
-	while (cpt < 1)
+	while (j < height + offset)
 	{
-		while (j < height + offset)
-		{
-			if (game->store.color)
-				pixel_put(game->img, j, (530 + game->store.r) + cpt,
-					0x00002888);
-			else
-				pixel_put(game->img, j, (530 + game->store.r) + cpt,
-					0x80090888);
-			j++;
-		}
-		j = offset;
-		cpt++;
+		pixel_put(game->img, j, (530 + game->store.r) + cpt,
+			get_colour_from_texture(height, &game->south, j - offset, game->store.r));
+		j++;
 	}
 }
 
@@ -170,7 +175,7 @@ void	load_textures(t_game *game)
 	if (game->north.img == NULL || game->south.img == NULL
 		|| game->east.img == NULL || game->west.img == NULL)
 	{
-		ft_putendl_fd("Error\nOne or more textures couldn't be loaded", 2);
+		ft_putendl_fd("Error\nTextures couldn't be loaded", 2);
 		close_program(game);
 	}
 	game->north.addr = mlx_get_data_addr(game->north.img, &game->north.bpp,
