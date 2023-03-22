@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/22 19:38:14 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/22 21:25:44 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,57 +128,25 @@ void	distance_v(t_game *game, int pix)
 void	draw_rays(t_game *game)
 {
 	int	pix;
-	int	wall_start;
-	int	wall_x;
-	int	wall_y;
 
 	pix = 512 / game->map.grid_height;
 	init_draw_ray(game);
 	while (game->store.r < RAY_NUMBER)
 	{
-		wall_x = game->store.mx;
-		wall_y = game->store.my;
-		wall_start = game->store.r;
-		game->store.wall_ray_nb = 0;
-		game->store.wall_width = 0;
-		while (game->store.r < RAY_NUMBER && wall_x == game->store.mx && wall_y == game->store.my)
+		distance_h(game, pix);
+		distance_v(game, pix);
+		pick_v_or_h(game, pix);
+		draw_minimap_dot(game);
+		game->store.r++;
+		draw_three_d(game, game->store.distance, game->store.ra);
+		game->store.ra += (DR / 8);
+		if (game->store.ra < 0)
 		{
-			distance_h(game, pix);
-			distance_v(game, pix);
-			pick_v_or_h(game, pix);
-			game->store.r++;
-			game->store.ra += (DR / 8);
-			if (game->store.ra < 0)
-				game->store.ra += 2 * PI;
-			if (game->store.ra > 2 * PI)
-				game->store.ra -= 2 * PI;
-			game->store.wall_width++;
+			game->store.ra += 2 * PI;
 		}
-		game->store.mx = wall_x;
-		game->store.my = wall_y;
-		while (game->store.r > wall_start)
+		if (game->store.ra > 2 * PI)
 		{
-			game->store.ra -= (DR / 8);
-			if (game->store.ra < 0)
-				game->store.ra += 2 * PI;
-			if (game->store.ra > 2 * PI)
-				game->store.ra -= 2 * PI;
-			game->store.r--;
-		}
-		while (game->store.r < RAY_NUMBER && wall_x == game->store.mx && wall_y == game->store.my)
-		{
-			distance_h(game, pix);
-			distance_v(game, pix);
-			pick_v_or_h(game, pix);
-			draw_minimap_dot(game);
-			game->store.r++;
-			game->store.wall_ray_nb++;
-			draw_three_d(game, game->store.distance, game->store.ra);
-			game->store.ra += (DR / 8);
-			if (game->store.ra < 0)
-				game->store.ra += 2 * PI;
-			if (game->store.ra > 2 * PI)
-				game->store.ra -= 2 * PI;
+			game->store.ra -= 2 * PI;
 		}
 	}
 }
