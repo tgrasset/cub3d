@@ -83,6 +83,8 @@ typedef struct s_raystorage
 	float	vx;
 	float	vy;
 	float	distance;
+	int		wall_width;
+	int		wall_ray_nb;
 }				t_raystorage;
 
 typedef struct s_game
@@ -112,7 +114,7 @@ void	pixel_put(t_data *data, int x, int y, int color);
 float	dist(float ax, float ay, float bx, float by);
 
 //raycasting
-void	draw_ray(t_game *game);
+void	draw_rays(t_game *game);
 void	distance_h(t_game *game, int pix);
 void	distance_v(t_game *game, int pix);
 void	loop_distance_v(t_game *game, int pix);

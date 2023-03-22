@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/22 14:00:07 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/22 15:41:15 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,15 @@ float	dist(float ax, float ay, float bx, float by)
 	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
-int	get_colour_from_texture(float height, t_data *data, int wall_y, int wall_x)
+int	get_colour_from_texture(float height, t_data *data, t_game *game, int wall_y)
 {
 	char	*dst;
 	int	x;
 	int	y;
 	unsigned int res;
 
-	x = wall_x * data->w / 480;
-	y = wall_y * data->h / height;
+	y = game->store.wall_ray_nb * data->w / game->store.wall_width;
+	x = wall_y * data->h / height;
 	dst = data->addr + (x * data->ll + y * (data->bpp /8));
 	res = *(unsigned int *)dst;
 	return (res);
@@ -69,7 +69,7 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	while (j < height + offset)
 	{
 		pixel_put(game->img, j, (530 + game->store.r) + cpt,
-			get_colour_from_texture(height, &game->south, j - offset, game->store.r));
+			get_colour_from_texture(height, &game->south, game, j - offset));
 		j++;
 	}
 }
@@ -113,7 +113,7 @@ void	add_to_image(t_game *game)
 	}
 	draw_map(game);
 	draw_player(game);
-	draw_ray(game);
+	draw_rays(game);
 	mlx_put_image_to_window(game->win->mlx, game->win->mlx_win, game->img->img, 0, 0);
 }
 
