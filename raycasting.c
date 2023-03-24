@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/24 14:33:38 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:50:15 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,8 @@ void	draw_rays(t_game *game)
 		draw_three_d(game, game->store.distance, game->store.ra);
 		game->store.ra += (DR / 8);
 		if (game->store.ra < 0)
-		{
 			game->store.ra += 2 * PI;
-		}
 		if (game->store.ra > 2 * PI)
-		{
 			game->store.ra -= 2 * PI;
-		}
 	}
 }

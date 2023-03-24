@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/22 21:21:29 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:56:59 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,30 @@ void	draw_player(t_game *game)
 	int	i;
 	int	j;
 
-	i = game->player_y;
-	j = game->player_x;
-	while (i < game->player_y + 5)
+	i = 75; //pix * nombre de cases minimap (ici -5 a +5)
+	j = 75;
+	while (i < 79)
 	{
-		while (j < game->player_x + 5)
+		while (j < 79)
 		{
 			pixel_put(game->img, i, j,
 				0x80090888);
 			j++;
 		}
-		j = game->player_x;
+		j = 75;
+		i++;
+	}
+	i = 75 + game->player_deltax;
+	j = 75 + game->player_deltay;
+	while (i < 78 + game->player_deltax)
+	{
+		while (j < 78 + game->player_deltay)
+		{
+			pixel_put(game->img, j, i,
+				0x00FF0000);
+			j++;
+		}
+		j = 75 + game->player_deltay;
 		i++;
 	}
 }
@@ -76,22 +89,28 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	float		px;
 	float		py;
 
+	j = 0;
+	while (j < offset)
+	{
+		pixel_put(game->img, j, (230 + game->store.r),
+			0x0ADD8E6);
+			j++;
+	}
 	px = (game->player_x) / (512 / game->map.grid_height);
 	py = (game->player_y) / (512 / game->map.grid_height);
-	j = offset;
 	while (j < height + offset)
 	{
 		if (game->store.distance == game->store.dis_h && py > game->store.my)
-			pixel_put(game->img, j, 530 + game->store.r,
+			pixel_put(game->img, j, 230 + game->store.r,
 			get_colour_from_texture(height, &game->south, game, j - offset));
 		else if (game->store.distance == game->store.dis_h && py < game->store.my)
-			pixel_put(game->img, j, 530 + game->store.r,
+			pixel_put(game->img, j, 230 + game->store.r,
 			get_colour_from_texture(height, &game->north, game, j - offset));
 		else if (game->store.distance == game->store.dis_v && px > game->store.mx)
-			pixel_put(game->img, j, 530 + game->store.r,
+			pixel_put(game->img, j, 230 + game->store.r,
 			get_colour_from_texture(height, &game->west, game, j - offset));
 		else if (game->store.distance == game->store.dis_v && px < game->store.mx)
-			pixel_put(game->img, j, 530 + game->store.r,
+			pixel_put(game->img, j, 230 + game->store.r,
 			get_colour_from_texture(height, &game->east, game, j - offset));
 		j++;
 	}
@@ -109,10 +128,10 @@ void	draw_three_d(t_game *game, float distance, float ra)
 	if (plan_fisheye > 2 * PI)
 		plan_fisheye -= 2 * PI;
 	distance = distance * cos(plan_fisheye);
-	height = (8 * 2 * 320) / distance; //bizarre value
+	height = (8 * 2 * 512) / distance; //bizarre value
 	game->store.actual_height = height;
-	if (height > 320)
-		height = 320;
+	if (height > 512)
+		height = 512;
 	offset = 200 - height / 2;
 	loop_draw_three_d(game, height, offset);
 }
@@ -145,44 +164,65 @@ void	draw_map(t_game *game)
 {
 	int	x;
 	int	y;
+	int	x_origin;
+	int	y_origin;
 	int	xo;
 	int	yo;
 	int	pix;
 
-	x = 0;
-	y = 0;
+	x = (int)(game->player_x) / (512 / game->map.grid_height);
+	y = (int)(game->player_y) / (512 / game->map.grid_height);
+	x = x - 5;
+	y = y - 5;
+	x_origin = 0;
+	y_origin = 0;
 	pix = 512 / (game->map.grid_width);
-	while (x < game->map.grid_width)
+	while (x < (int)(game->player_x) / (512 / game->map.grid_height) + 5)
 	{
-		while (y < game->map.grid_width)
+		while (y < (int)(game->player_y) / (512 / game->map.grid_height) + 5)
 		{
-			xo = x * pix;
-			yo = y * pix;
-			while (xo < ((x + 1) * pix) - 1) // 10px offset entre chaque case
+			xo = x_origin * pix;
+			yo = y_origin * pix;
+			while (xo < ((x_origin + 1) * pix) - 1) // 1px offset entre chaque case
 			{
-				while (yo < ((y + 1) * pix) - 1)
+				while (yo < ((y_origin + 1) * pix) - 1)
 				{
-					pixel_put(game->img, xo, yo,
-						0x00000000);
-					if (game->map.grid[x][y] == '1')
+					if (x < 0 || x >= game->map.grid_height)
 					{
-						pixel_put(game->img, xo, yo,
+						break ;
+					}
+					if (y < 0 || y >= game->map.grid_height)
+					{
+						//printf("breaking : %d %d\n", y, x);
+						break ;
+					}
+					//printf("drawing to pixel %d %d\npix%d\n", yo, xo, pix);
+					pixel_put(game->img, yo, xo,
+						0x00000000);
+					if (game->map.grid[y][x] == '1')
+					{
+						pixel_put(game->img, yo, xo,
 							0x88800000);
 					}
 					else
 					{
-						pixel_put(game->img, xo, yo,
+						pixel_put(game->img, yo, xo,
 							0x99999999);
 					}
 					yo++;
 				}
-				yo = y * pix;
+				yo = y_origin * pix;
 				xo++;
 			}
+			//printf("drawn : %d %d\n", y, x);
 			y++;
+			y_origin++;
 		}
 		x++;
-		y = 0;
+		x_origin++;
+		y_origin = 0;
+		y = (int)(game->player_y) / (512 / game->map.grid_height);
+		y = y - 5;
 	}
 }
 

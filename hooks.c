@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/24 14:36:34 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:43:17 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,11 @@ int	hook_slide(int keycode, t_game *game)
 	else if (keycode == 65363)
 		turn_right(game);
 	else if (keycode == 65364)
-	{
 		go_backward(game);
-	}
 	else if (keycode == 65362)
-	{
 		go_forward(game);
-	}
+	else if (keycode == 65307)
+		destroy_window(game);
 	add_to_image(game);
 	return (keycode);
 }
@@ -110,6 +108,5 @@ void	close_program(t_game *game)
 	free(game->win->mlx);
 	free_map(&game->map);
 	//free(game);
-
 	exit(1);
 }
