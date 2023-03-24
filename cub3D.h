@@ -29,7 +29,7 @@
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533 // 1 degre = DR radians
-# define RAY_NUMBER 480
+# define RAY_NUMBER 720
 
 typedef struct s_map
 {
@@ -129,6 +129,8 @@ void	draw_minimap_dot(t_game *game);
 int		destroy_window(t_game *game);
 void	close_program(t_game *game);
 int		hook_slide(int keycode, t_game *game);
+void	go_forward(t_game *game);
+void	go_backward(t_game *game);
 
 // parsing functions
 

@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/22 21:25:44 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:50:15 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	loop_distance_h(t_game *game, int pix)
 		game->store.my = (int)(game->store.ry) / pix;
 		game->store.mp = game->store.my
 			* game->map.grid_height + game->store.mx;
-		if (game->store.mp > 0
+		if (game->store.my >= 0
+			&& game->store.mx >= 0
 			&& game->store.mp < game->map.grid_height * game->map.grid_height
 			&& game->map.grid[game->store.my][game->store.mx] == '1')
 		{
@@ -77,7 +78,8 @@ void	loop_distance_v(t_game *game, int pix)
 		game->store.my = (int)(game->store.ry) / pix;
 		game->store.mp = game->store.my
 			* game->map.grid_height + game->store.mx;
-		if (game->store.mp > 0
+		if (game->store.my >= 0
+			&& game->store.mx >= 0
 			&& game->store.mp < game->map.grid_height * game->map.grid_height
 			&& game->map.grid[game->store.my][game->store.mx] == '1')
 		{
@@ -136,17 +138,13 @@ void	draw_rays(t_game *game)
 		distance_h(game, pix);
 		distance_v(game, pix);
 		pick_v_or_h(game, pix);
-		draw_minimap_dot(game);
+		//draw_minimap_dot(game);
 		game->store.r++;
 		draw_three_d(game, game->store.distance, game->store.ra);
 		game->store.ra += (DR / 8);
 		if (game->store.ra < 0)
-		{
 			game->store.ra += 2 * PI;
-		}
 		if (game->store.ra > 2 * PI)
-		{
 			game->store.ra -= 2 * PI;
-		}
 	}
 }

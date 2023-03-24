@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 16:17:20 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/24 15:43:17 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,36 @@ void	go_backward(t_game *game)
 	int	mx;
 	int	my;
 
-	mx = (int)game->player_x / game->map.grid_height;
-	my = (int)game->player_y / game->map.grid_height;
+	mx = (int)(game->player_x - (game->player_deltax * 2)) / (512 / game->map.grid_height);
+	my = (int)(game->player_y - (game->player_deltay * 2)) / (512 / game->map.grid_height);
 	if (mx < game->map.grid_height && mx > 0)
 	{
 		if (my < game->map.grid_height && my > 0)
 		{
-			printf("%d:%d\n", mx, my);
-			if (!game->map.grid[my][mx])
+			if (game->map.grid[my][mx] == '0')
 			{
 				game->player_x -= game->player_deltax;
 				game->player_y -= game->player_deltay;
+			}
+		}
+	}
+}
+
+void	go_forward(t_game *game)
+{
+	int	mx;
+	int	my;
+
+	mx = (int)(game->player_x + (game->player_deltax * 2)) / (512 / game->map.grid_height);
+	my = (int)(game->player_y + (game->player_deltay * 2)) / (512 / game->map.grid_height);
+	if (mx < game->map.grid_height && mx > 0)
+	{
+		if (my < game->map.grid_height && my > 0)
+		{
+			if (game->map.grid[my][mx] == '0')
+			{
+				game->player_x += game->player_deltax;
+				game->player_y += game->player_deltay;
 			}
 		}
 	}
@@ -64,15 +83,11 @@ int	hook_slide(int keycode, t_game *game)
 	else if (keycode == 65363)
 		turn_right(game);
 	else if (keycode == 65364)
-	{
-		game->player_x -= game->player_deltax;
-		game->player_y -= game->player_deltay;
-	}
+		go_backward(game);
 	else if (keycode == 65362)
-	{
-		game->player_x += game->player_deltax;
-		game->player_y += game->player_deltay;
-	}
+		go_forward(game);
+	else if (keycode == 65307)
+		destroy_window(game);
 	add_to_image(game);
 	return (keycode);
 }
@@ -93,6 +108,5 @@ void	close_program(t_game *game)
 	free(game->win->mlx);
 	free_map(&game->map);
 	//free(game);
-
 	exit(1);
 }
