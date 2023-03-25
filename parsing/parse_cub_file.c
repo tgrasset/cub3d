@@ -16,9 +16,9 @@ void	set_default_colour(t_map *map, char c)
 {
 	if (c == 'F')
 	{
-		map->floor[0] = 124;
-		map->floor[1] = 252;
-		map->floor[2] = 0;
+		map->floor[0] = 41;
+		map->floor[1] = 156;
+		map->floor[2] = 25;
 	}
 	else if (c == 'C')
 	{

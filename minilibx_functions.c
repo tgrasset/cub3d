@@ -93,7 +93,7 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	while (j < offset)
 	{
 		pixel_put(game->img, j, (230 + game->store.r),
-			0x0ADD8E6);
+			0x87CEEB);
 			j++;
 	}
 	px = (game->player_x) / (512 / game->map.grid_height);
@@ -113,6 +113,12 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 			pixel_put(game->img, j, 230 + game->store.r,
 			get_colour_from_texture(height, &game->east, game, j - offset));
 		j++;
+	}
+	while (j <= 455)
+	{
+		pixel_put(game->img, j, (230 + game->store.r),
+			0x299c19);
+			j++;
 	}
 }
 
