@@ -126,8 +126,7 @@ void	init_draw_ray(t_game *game);
 void	draw_minimap_dot(t_game *game);
 
 //hooks
-int		destroy_window(t_game *game);
-void	close_program(t_game *game);
+int		close_program(t_game *game);
 int		hook_slide(int keycode, t_game *game);
 void	go_forward(t_game *game);
 void	go_backward(t_game *game);

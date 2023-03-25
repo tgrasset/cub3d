@@ -273,6 +273,6 @@ void	init_mlx(t_game *game)
 	add_to_image(game);
 	mlx_put_image_to_window(win.mlx, win.mlx_win, game->img->img, 0, 0);
 	mlx_hook(win.mlx_win, 2, 1L << 0, hook_slide, game);
-	mlx_hook(win.mlx_win, 17, 0L, destroy_window, game);
+	mlx_hook(win.mlx_win, 17, 0L, close_program, game);
 	mlx_loop(win.mlx);
 }
