@@ -93,7 +93,7 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	while (j < offset)
 	{
 		pixel_put(game->img, j, (230 + game->store.r),
-			0x0ADD8E6);
+			0x87CEEB);
 			j++;
 	}
 	px = (game->player_x) / (512 / game->map.grid_height);
@@ -113,6 +113,12 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 			pixel_put(game->img, j, 230 + game->store.r,
 			get_colour_from_texture(height, &game->east, game, j - offset));
 		j++;
+	}
+	while (j <= 455)
+	{
+		pixel_put(game->img, j, (230 + game->store.r),
+			0x299c19);
+			j++;
 	}
 }
 
@@ -136,7 +142,7 @@ void	draw_three_d(t_game *game, float distance, float ra)
 	loop_draw_three_d(game, height, offset);
 }
 
-void	add_to_image(t_game *game)
+int	render(t_game *game)
 {
 	float	i;
 	float	j;
@@ -154,10 +160,12 @@ void	add_to_image(t_game *game)
 		j = 0;
 		i++;
 	}
+	move_player(game);
 	draw_map(game);
 	draw_player(game);
 	draw_rays(game);
 	mlx_put_image_to_window(game->win->mlx, game->win->mlx_win, game->img->img, 0, 0);
+	return (0);
 }
 
 void	draw_map(t_game *game)
@@ -264,9 +272,11 @@ void	init_mlx(t_game *game)
 	game->win = &win;
 	game->img = &img;
 	load_textures(game);
-	add_to_image(game);
-	mlx_put_image_to_window(win.mlx, win.mlx_win, game->img->img, 0, 0);
-	mlx_hook(win.mlx_win, 2, 1L << 0, hook_slide, game);
-	mlx_hook(win.mlx_win, 17, 0L, destroy_window, game);
+	render(game);
+	// mlx_put_image_to_window(win.mlx, win.mlx_win, game->img->img, 0, 0);
+	mlx_hook(win.mlx_win, 17, 0L, close_program, game);
+	mlx_hook(win.mlx_win, 2, 1L << 0, key_press, game);
+	mlx_loop_hook(win.mlx, render, game);
+	mlx_hook(win.mlx_win, 3, 1L << 1, key_release, game);
 	mlx_loop(win.mlx);
 }

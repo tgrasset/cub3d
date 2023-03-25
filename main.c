@@ -22,6 +22,13 @@ int	main(int ac, char **av)
 	game.player_angle = 0.1;
 	game.player_deltax = cos(game.player_angle) * 5;
 	game.player_deltay = sin(game.player_angle) * 5;
+	game.backwd = 0;
+	game.forwd = 0;
+	game.strafe_l = 0;
+	game.strafe_r = 0;
+	game.look_l = 0;
+	game.look_r = 0;
 	init_mlx(&game);
+	close_program(&game);
 	return (0);
 }

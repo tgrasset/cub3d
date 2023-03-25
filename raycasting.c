@@ -141,7 +141,7 @@ void	draw_rays(t_game *game)
 		//draw_minimap_dot(game);
 		game->store.r++;
 		draw_three_d(game, game->store.distance, game->store.ra);
-		game->store.ra += (DR / 8);
+		game->store.ra += (DR / 12);
 		if (game->store.ra < 0)
 			game->store.ra += 2 * PI;
 		if (game->store.ra > 2 * PI)
