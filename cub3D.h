@@ -74,7 +74,8 @@ typedef struct s_raystorage
 	int		my;
 	int		mp; //useless dans un char **, utiliser mx/my
 	int		dof;
-	int		color; // temporary, useless
+	int		dof_max;
+	int		color;
 	float	rx;
 	float	ry;
 	float	ra;
@@ -113,6 +114,9 @@ typedef struct s_game
 	int				look_r;
 }				t_game;
 
+//main
+void	select_player_dir(t_game *game);
+
 //minilibx_functions
 void	init_mlx(t_game *game);
 int		render(t_game *game);
@@ -133,6 +137,7 @@ void	loop_distance_h(t_game *game, int pix);
 void	pick_v_or_h(t_game *game, int pix);
 void	init_draw_ray(t_game *game);
 void	draw_minimap_dot(t_game *game);
+void	reinitialize_distances(t_game *game);
 
 //hooks
 int		close_program(t_game *game);

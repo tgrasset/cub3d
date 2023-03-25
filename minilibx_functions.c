@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/24 15:56:59 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/25 23:05:17 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,37 @@ void	draw_player(t_game *game)
 {
 	int	i;
 	int	j;
+	int	cases;
+	int	pix;
 
-	i = 75; //pix * nombre de cases minimap (ici -5 a +5)
-	j = 75;
-	while (i < 79)
+	cases = (game->map.grid_height / 6) * 2;
+	if (game->map.grid_height > 2 && cases / 2 < 2)
+		cases += 2;
+	pix = 512 / (game->map.grid_height * 2);
+	i = cases * pix + (pix); //pix * nombre de cases minimap (ici -5 a +5)
+	j = cases * pix + (pix);
+	while (i < (cases * pix + (pix)) + 4)
 	{
-		while (j < 79)
+		while (j < (cases * pix + (pix)) + 4)
 		{
 			pixel_put(game->img, i, j,
 				0x80090888);
 			j++;
 		}
-		j = 75;
+		j = cases * pix + (pix);
 		i++;
 	}
-	i = 75 + game->player_deltax;
-	j = 75 + game->player_deltay;
-	while (i < 78 + game->player_deltax)
+	i = cases * pix + pix + game->player_deltax;
+	j = cases * pix + pix + game->player_deltay;
+	while (i < ((cases * pix + pix) + 3) + game->player_deltax)
 	{
-		while (j < 78 + game->player_deltay)
+		while (j < ((cases * pix + pix) + 3) + game->player_deltay)
 		{
 			pixel_put(game->img, j, i,
 				0x00FF0000);
 			j++;
 		}
-		j = 75 + game->player_deltay;
+		j = cases * pix + pix + game->player_deltay;
 		i++;
 	}
 }
@@ -161,9 +167,9 @@ int	render(t_game *game)
 		i++;
 	}
 	move_player(game);
+	draw_rays(game);
 	draw_map(game);
 	draw_player(game);
-	draw_rays(game);
 	mlx_put_image_to_window(game->win->mlx, game->win->mlx_win, game->img->img, 0, 0);
 	return (0);
 }
@@ -177,23 +183,27 @@ void	draw_map(t_game *game)
 	int	xo;
 	int	yo;
 	int	pix;
+	int	cases;
 
+	cases = (game->map.grid_height / 6);
+	if (game->map.grid_height > 2 && cases < 2)
+		cases++;
 	x = (int)(game->player_x) / (512 / game->map.grid_height);
 	y = (int)(game->player_y) / (512 / game->map.grid_height);
-	x = x - 5;
-	y = y - 5;
+	x = x - cases;
+	y = y - cases;
 	x_origin = 0;
 	y_origin = 0;
 	pix = 512 / (game->map.grid_width);
-	while (x < (int)(game->player_x) / (512 / game->map.grid_height) + 5)
+	while (x < (int)(game->player_x) / (512 / game->map.grid_height) + cases)
 	{
-		while (y < (int)(game->player_y) / (512 / game->map.grid_height) + 5)
+		while (y < (int)(game->player_y) / (512 / game->map.grid_height) + cases)
 		{
 			xo = x_origin * pix;
 			yo = y_origin * pix;
-			while (xo < ((x_origin + 1) * pix) - 1) // 1px offset entre chaque case
+			while (xo < ((x_origin + 1) * pix)) // 1px offset entre chaque case
 			{
-				while (yo < ((y_origin + 1) * pix) - 1)
+				while (yo < ((y_origin + 1) * pix))
 				{
 					if (x < 0 || x >= game->map.grid_height)
 					{
@@ -222,7 +232,6 @@ void	draw_map(t_game *game)
 				yo = y_origin * pix;
 				xo++;
 			}
-			//printf("drawn : %d %d\n", y, x);
 			y++;
 			y_origin++;
 		}
@@ -230,7 +239,7 @@ void	draw_map(t_game *game)
 		x_origin++;
 		y_origin = 0;
 		y = (int)(game->player_y) / (512 / game->map.grid_height);
-		y = y - 5;
+		y = y - cases;
 	}
 }
 

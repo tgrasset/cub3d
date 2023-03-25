@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/24 15:43:17 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/25 23:02:37 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	key_press(int keycode, t_game *game)
 		game->forwd = 1;
 	if (keycode == XK_D)
 		game->strafe_r = 1;
-	if (keycode == XK_A)
+	if (keycode == 113)
 		game->strafe_l = 1;
 	if (keycode == XK_Escape)
 		close_program(game);

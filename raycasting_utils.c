@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/21 16:06:39 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:38:18 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@
 void	pick_v_or_h(t_game *game, int pix)
 {
 	game->store.color = 0;
-	if (game->store.dis_v < game->store.dis_h)
+	if (game->store.dis_v <= game->store.dis_h)
 	{
+		//printf("picking disv = %lf over dish = %lf\n", game->store.dis_v, game->store.dis_h);
 		game->store.rx = game->store.vx;
 		game->store.ry = game->store.vy;
 		game->store.distance = game->store.dis_v;
@@ -25,6 +26,7 @@ void	pick_v_or_h(t_game *game, int pix)
 	}
 	if (game->store.dis_v > game->store.dis_h)
 	{
+		//printf("picking dish = %lf over disv = %lf\n", game->store.dis_h, game->store.dis_v);
 		game->store.rx = game->store.hx;
 		game->store.ry = game->store.hy;
 		game->store.distance = game->store.dis_h;
@@ -79,4 +81,15 @@ void	draw_minimap_dot(t_game *game)
 			i++;
 		}
 	}
+}
+
+void	reinitialize_distances(t_game *game)
+{
+	game->store.dis_h = 1000000;
+	game->store.hx = game->player_x;
+	game->store.hy = game->player_y;
+
+	game->store.dis_v = 1000000;
+	game->store.vx = game->player_x;
+	game->store.vy = game->player_y;
 }
