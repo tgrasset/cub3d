@@ -33,7 +33,7 @@ int	close_program(t_game *game)
 
 void	turn_left(t_game *game)
 {
-	game->player_angle -= 0.02;
+	game->player_angle -= 0.015;
 	if (game->player_angle < 0)
 		game->player_angle+= 2*PI;
 	game->player_deltax = cos(game->player_angle) * 5;
@@ -42,7 +42,7 @@ void	turn_left(t_game *game)
 
 void	turn_right(t_game *game)
 {
-	game->player_angle += 0.02;
+	game->player_angle += 0.015;
 	if (game->player_angle > 2*PI)
 		game->player_angle-= 2*PI;
 	game->player_deltax = cos(game->player_angle) * 5;
@@ -62,8 +62,8 @@ void	go_backward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->player_deltax / 7;
-				game->player_y -= game->player_deltay / 7;
+				game->player_x -= game->player_deltax / 12;
+				game->player_y -= game->player_deltay / 12;
 			}
 		}
 	}
@@ -82,8 +82,8 @@ void	go_forward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x += game->player_deltax / 7;
-				game->player_y += game->player_deltay / 7;
+				game->player_x += game->player_deltax / 12;
+				game->player_y += game->player_deltay / 12;
 			}
 		}
 	}
