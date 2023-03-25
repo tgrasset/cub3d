@@ -24,6 +24,9 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "minilibx-linux/mlx.h"
+# include <X11/keysym.h>
+# include <X11/keysymdef.h>
+
 
 # define PI 3.1415926535
 # define P2 PI/2
@@ -102,11 +105,17 @@ typedef struct s_game
 	float			player_deltay;
 	float			player_angle;
 	t_raystorage	store;
+	int				forwd;
+	int				backwd;
+	int				strafe_l;
+	int				strafe_r;
+	int				look_l;
+	int				look_r;
 }				t_game;
 
 //minilibx_functions
 void	init_mlx(t_game *game);
-void	add_to_image(t_game *game);
+int		render(t_game *game);
 void	draw_map(t_game *game);
 void	draw_player(t_game *game);
 void	draw_three_d(t_game *game, float distance, float ra);
@@ -127,9 +136,11 @@ void	draw_minimap_dot(t_game *game);
 
 //hooks
 int		close_program(t_game *game);
-int		hook_slide(int keycode, t_game *game);
+int		key_press(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
 void	go_forward(t_game *game);
 void	go_backward(t_game *game);
+void	move_player(t_game *game);
 
 // parsing functions
 

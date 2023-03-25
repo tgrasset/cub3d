@@ -33,7 +33,7 @@ int	close_program(t_game *game)
 
 void	turn_left(t_game *game)
 {
-	game->player_angle -= 0.1;
+	game->player_angle -= 0.02;
 	if (game->player_angle < 0)
 		game->player_angle+= 2*PI;
 	game->player_deltax = cos(game->player_angle) * 5;
@@ -42,7 +42,7 @@ void	turn_left(t_game *game)
 
 void	turn_right(t_game *game)
 {
-	game->player_angle += 0.1;
+	game->player_angle += 0.02;
 	if (game->player_angle > 2*PI)
 		game->player_angle-= 2*PI;
 	game->player_deltax = cos(game->player_angle) * 5;
@@ -62,8 +62,8 @@ void	go_backward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->player_deltax;
-				game->player_y -= game->player_deltay;
+				game->player_x -= game->player_deltax / 7;
+				game->player_y -= game->player_deltay / 7;
 			}
 		}
 	}
@@ -82,25 +82,59 @@ void	go_forward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x += game->player_deltax;
-				game->player_y += game->player_deltay;
+				game->player_x += game->player_deltax / 7;
+				game->player_y += game->player_deltay / 7;
 			}
 		}
 	}
 }
 
-int	hook_slide(int keycode, t_game *game)
+void	move_player(t_game *game)
 {
-	if (keycode == 65361)
-		turn_left(game);
-	else if (keycode == 65363)
-		turn_right(game);
-	else if (keycode == 65364)
-		go_backward(game);
-	else if (keycode == 65362)
+	if (game->forwd == 1)
 		go_forward(game);
-	else if (keycode == 65307)
+	if (game->backwd == 1)
+		go_backward(game);
+	if (game->look_l == 1)
+		turn_left(game);
+	if (game->look_r == 1)
+		turn_right(game);
+}
+
+int	key_press(int keycode, t_game *game)
+{
+	if (keycode == XK_Left)
+		game->look_l = 1;
+	if (keycode == XK_Right)
+		game->look_r = 1;
+	if (keycode == XK_Down || keycode == XK_S)
+		game->backwd = 1;
+	if (keycode == XK_Up || keycode == XK_W)
+		game->forwd = 1;
+	if (keycode == XK_D)
+		game->strafe_r = 1;
+	if (keycode == XK_A)
+		game->strafe_l = 1;
+	if (keycode == XK_Escape)
 		close_program(game);
-	add_to_image(game);
-	return (keycode);
+	return (0);
+}
+
+int	key_release(int keycode, t_game *game)
+{
+	if (keycode == XK_Left)
+		game->look_l = 0;
+	if (keycode == XK_Right)
+		game->look_r = 0;
+	if (keycode == XK_Down || keycode == XK_S)
+		game->backwd = 0;
+	if (keycode == XK_Up || keycode == XK_W)
+		game->forwd = 0;
+	if (keycode == XK_D)
+		game->strafe_r = 0;
+	if (keycode == XK_A)
+		game->strafe_l = 0;
+	if (keycode == XK_Escape)
+		close_program(game);
+	return (0);
 }
