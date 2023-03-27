@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+         #
+#    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/27 09:35:06 by ael-youb         ###   ########.fr        #
+#    Updated: 2023/03/27 16:26:47 by tgrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS	=	./main.c \
    	 		./raycasting.c \
      	 	./raycasting_utils.c \
 			./utils.c \
+			./mouse.c \
 				
 OBJS	=	$(SRCS:%.c=%.o)
 

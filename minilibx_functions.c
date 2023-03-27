@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 12:03:57 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:25:59 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	render(t_game *game)
 		j = 0;
 		i++;
 	}
+	if (game->focus == 1)
+		check_mouse_move(game);
 	move_player(game);
 	draw_rays(game);
 	draw_map(game);
@@ -101,6 +103,7 @@ void	init_mlx(t_game *game)
 	game->img = &img;
 	load_textures(game);
 	render(game);
+	mlx_hook(game->win->mlx_win, 4, 1L << 2, capture_mouse, game);
 	mlx_hook(win.mlx_win, 17, 0L, close_program, game);
 	mlx_hook(win.mlx_win, 2, 1L << 0, key_press, game);
 	mlx_loop_hook(win.mlx, render, game);

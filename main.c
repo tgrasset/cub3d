@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/27 11:23:42 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:21:49 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	main(int ac, char **av)
 	game.strafe_r = 0;
 	game.look_l = 0;
 	game.look_r = 0;
+	game.focus = 0;
 	init_mlx(&game);
 	close_program(&game);
 	return (0);
