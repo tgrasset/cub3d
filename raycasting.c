@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 09:33:34 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:35:40 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	draw_rays(t_game *game)
 {
 	int	pix;
 
-	pix = 512 / game->map.grid_height;
+	pix = HEIGHT / game->map.grid_height;
 	init_draw_ray(game);
 	while (game->store.r < RAY_NUMBER)
 	{
@@ -141,7 +141,7 @@ void	draw_rays(t_game *game)
 		pick_v_or_h(game, pix);
 		game->store.r++;
 		draw_three_d(game, game->store.distance, game->store.ra);
-		game->store.ra += (DR / 12);
+		game->store.ra += (DR / 24);
 		if (game->store.ra < 0)
 			game->store.ra += 2 * PI;
 		if (game->store.ra > 2 * PI)

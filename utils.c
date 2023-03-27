@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:03:21 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 09:34:05 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:54:15 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	get_colour_from_texture(int height, t_data *data, t_game *game, int wall_y)
 	float			tmp;
 
 	if (game->store.distance == game->store.dis_h)
-		tmp = game->store.rx / (512 / (game->map.grid_width));
+		tmp = game->store.rx / (HEIGHT / (game->map.grid_width));
 	else
-		tmp = game->store.ry / (512 / (game->map.grid_width));
+		tmp = game->store.ry / (HEIGHT / (game->map.grid_width));
 	tmp -= (int)tmp;
 	tmp *= 1000;
 	y = (int)tmp;

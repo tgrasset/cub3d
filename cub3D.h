@@ -32,7 +32,8 @@
 # define P2 PI/2
 # define P3 3*PI/2
 # define DR 0.0174533 // 1 degre = DR radians
-# define RAY_NUMBER 720
+# define RAY_NUMBER 1440
+# define HEIGHT 1024
 
 typedef struct s_minimap
 {
