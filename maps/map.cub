@@ -1,10 +1,10 @@
-WE ./textures/metal.xpm
-NO ./textures/mur_moche.xpm
-SO ./textures/red_bricks.xpm
-EA ./textures/wood.xpm
+WE ./textures/lol.xpm
+NO ./textures/lol.xpm
+SO ./textures/lol.xpm
+EA ./textures/lol.xpm
 
 F 220,100,0
-C 225,30,0
+C 225,30,150
 
 11111111111111111   11111
 10000000000000001   10001
