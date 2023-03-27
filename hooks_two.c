@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 11:25:12 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:30:01 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,5 @@ int	key_release(int keycode, t_game *game)
 		game->strafe_r = 0;
 	if (keycode == XK_a)
 		game->strafe_l = 0;
-	if (keycode == XK_Escape)
-		close_program(game);
 	return (0);
 }
