@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 09:31:53 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:03:57 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	while (j < offset)
 	{
 		pixel_put(game->img, j, (game->store.r),
-			0x87CEEB);
+			game->map.ceiling_int);
 			j++;
 	}
 	loop_loop_drawthreed(game, height, offset, j);
 	j = height + offset;
-	while (j <= 512)
+	while (j <= HEIGHT)
 	{
 		pixel_put(game->img, j, (game->store.r),
-			0x299c19);
+			game->map.floor_int);
 			j++;
 	}
 }
@@ -53,11 +53,11 @@ void	draw_three_d(t_game *game, float distance, float ra)
 	if (plan_fisheye > 2 * PI)
 		plan_fisheye -= 2 * PI;
 	distance = distance * cos(plan_fisheye);
-	height = (8 * 2 * 512) / distance;
+	height = (32 * HEIGHT) / distance;
 	game->store.actual_height = height;
-	if (height > 512)
-		height = 512;
-	offset = 256 - height / 2;
+	if (height > HEIGHT)
+		height = HEIGHT;
+	offset = (HEIGHT / 2) - height / 2;
 	loop_draw_three_d(game, height, offset);
 }
 
@@ -68,9 +68,9 @@ int	render(t_game *game)
 
 	i = 0;
 	j = 0;
-	while (i < 512)
+	while (i < HEIGHT)
 	{
-		while (j < 1024)
+		while (j < RAY_NUMBER)
 		{
 			pixel_put(game->img, i, j,
 				0x80808080);
@@ -94,8 +94,8 @@ void	init_mlx(t_game *game)
 	t_data	img;
 
 	win.mlx = mlx_init();
-	win.mlx_win = mlx_new_window(win.mlx, 721, 512, "Louveteau 3D");
-	img.img = mlx_new_image(win.mlx, 721, 512);
+	win.mlx_win = mlx_new_window(win.mlx, RAY_NUMBER, HEIGHT, "Louveteau 3D");
+	img.img = mlx_new_image(win.mlx, RAY_NUMBER, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.ll, &img.endian);
 	game->win = &win;
 	game->img = &img;

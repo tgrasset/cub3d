@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/27 11:24:25 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:23:42 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	parse_cub_file(ac, av[1], &game.map);
-	game.player_y = 512 / game.map.grid_height * game.map.p_y;
-	game.player_x = 512 / game.map.grid_height * game.map.p_x;
+	game.player_y = HEIGHT / game.map.grid_height * game.map.p_y;
+	game.player_x = HEIGHT / game.map.grid_height * game.map.p_x;
 	game.store.dof_max = game.map.grid_height - 1;
 	select_player_dir(&game);
 	ceiling_floor_colors(&game);

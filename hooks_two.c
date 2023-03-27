@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 11:30:01 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:54:17 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	strafe_left(t_game *game)
 	int	my;
 
 	mx = (int)(game->player_x - (game->strafe_deltax * 2))
-		/ (512 / game->map.grid_height);
+		/ (HEIGHT / game->map.grid_height);
 	my = (int)(game->player_y - (game->strafe_deltay * 2))
-		/ (512 / game->map.grid_height);
+		/ (HEIGHT / game->map.grid_height);
 	if (mx < game->map.grid_height && mx > 0)
 	{
 		if (my < game->map.grid_height && my > 0)
@@ -40,9 +40,9 @@ void	strafe_right(t_game *game)
 	int	my;
 
 	mx = (int)(game->player_x + (game->strafe_deltax * 2))
-		/ (512 / game->map.grid_height);
+		/ (HEIGHT / game->map.grid_height);
 	my = (int)(game->player_y + (game->strafe_deltay * 2))
-		/ (512 / game->map.grid_height);
+		/ (HEIGHT / game->map.grid_height);
 	if (mx < game->map.grid_height && mx > 0)
 	{
 		if (my < game->map.grid_height && my > 0)

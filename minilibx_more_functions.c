@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:05:53 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 09:23:09 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 10:54:13 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	init_minimap(t_minimap *minimap, t_game *game)
 	minimap->cases = (game->map.grid_height / 6);
 	if (minimap->cases < 2)
 		minimap->cases++;
-	minimap->x = (int)(game->player_x) / (512 / game->map.grid_height);
-	minimap->y = (int)(game->player_y) / (512 / game->map.grid_height);
+	minimap->x = (int)(game->player_x) / (HEIGHT / game->map.grid_height);
+	minimap->y = (int)(game->player_y) / (HEIGHT / game->map.grid_height);
 	minimap->x = minimap->x - minimap->cases;
 	minimap->y = minimap->y - minimap->cases;
 	minimap->x_origin = 0;
 	minimap->y_origin = 0;
-	minimap->pix = 512 / (game->map.grid_width);
+	minimap->pix = HEIGHT / (game->map.grid_width);
 	if (minimap->pix > 50)
 		minimap->pix = 50;
 }
@@ -59,10 +59,10 @@ void	draw_map(t_game *game)
 
 	init_minimap(&minimap, game);
 	while (minimap.x < (int)(game->player_x)
-		/ (512 / game->map.grid_height) + minimap.cases)
+		/ (HEIGHT / game->map.grid_height) + minimap.cases)
 	{
 		while (minimap.y < (int)(game->player_y) /
-			(512 / game->map.grid_height) + minimap.cases)
+			(HEIGHT / game->map.grid_height) + minimap.cases)
 		{
 			minimap.xo = minimap.x_origin * minimap.pix;
 			minimap.yo = minimap.y_origin * minimap.pix;
@@ -73,7 +73,7 @@ void	draw_map(t_game *game)
 		minimap.x++;
 		minimap.x_origin++;
 		minimap.y_origin = 0;
-		minimap.y = (int)(game->player_y) / (512 / game->map.grid_height);
+		minimap.y = (int)(game->player_y) / (HEIGHT / game->map.grid_height);
 		minimap.y = minimap.y - minimap.cases;
 	}
 }
@@ -114,7 +114,7 @@ void	draw_player(t_game *game)
 	cases = (game->map.grid_height / 6) * 2;
 	if (game->map.grid_height > 2 && cases / 2 < 2)
 		cases += 2;
-	pix = 512 / (game->map.grid_height * 2);
+	pix = HEIGHT / (game->map.grid_height * 2);
 	if (pix > 50)
 		pix = 50;
 	i = cases * pix + (pix);
