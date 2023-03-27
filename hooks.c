@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 10:54:16 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:46:27 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	close_program(t_game *game)
 
 void	turn_left(t_game *game)
 {
-	game->player_angle -= 0.015;
-	game->strafe_angle -= 0.015;
+	game->player_angle -= 0.03;
+	game->strafe_angle -= 0.03;
 	if (game->player_angle < 0)
 		game->player_angle += 2 * PI;
 	if (game->strafe_angle < 0)
@@ -46,8 +46,8 @@ void	turn_left(t_game *game)
 
 void	turn_right(t_game *game)
 {
-	game->player_angle += 0.015;
-	game->strafe_angle += 0.015;
+	game->player_angle += 0.03;
+	game->strafe_angle += 0.03;
 	if (game->player_angle > 2 * PI)
 		game->player_angle -= 2 * PI;
 	if (game->strafe_angle > 2 * PI)
@@ -73,8 +73,8 @@ void	go_backward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->player_deltax / 12;
-				game->player_y -= game->player_deltay / 12;
+				game->player_x -= game->player_deltax / 4;
+				game->player_y -= game->player_deltay / 4;
 			}
 		}
 	}
@@ -95,8 +95,8 @@ void	go_forward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x += game->player_deltax / 12;
-				game->player_y += game->player_deltay / 12;
+				game->player_x += game->player_deltax / 4;
+				game->player_y += game->player_deltay / 4;
 			}
 		}
 	}

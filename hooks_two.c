@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 10:54:17 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:49:57 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	strafe_left(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->strafe_deltax / 12;
-				game->player_y -= game->strafe_deltay / 12;
+				game->player_x -= game->strafe_deltax / 4;
+				game->player_y -= game->strafe_deltay / 4;
 			}
 		}
 	}
@@ -49,8 +49,8 @@ void	strafe_right(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x += game->strafe_deltax / 12;
-				game->player_y += game->strafe_deltay / 12;
+				game->player_x += game->strafe_deltax / 4;
+				game->player_y += game->strafe_deltay / 4;
 			}
 		}
 	}

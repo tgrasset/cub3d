@@ -1,3 +1,7 @@
+WE ./textures/metal.xpm
+NO ./textures/mur_moche.xpm
+SO ./textures/red_bricks.xpm
+EA ./textures/wood.xpm
 
 F 220,100,0
 C 225,30,0

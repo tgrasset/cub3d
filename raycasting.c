@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 11:35:40 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:44:33 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	loop_distance_h(t_game *game, int pix)
 			* game->map.grid_height + game->store.mx;
 		if (game->store.my >= 0
 			&& game->store.mx >= 0
-			&& game->store.mp < game->map.grid_height * game->map.grid_height
+			&& game->store.my < game->map.grid_height
+			&& game->store.mx < game->map.grid_height
 			&& game->map.grid[game->store.my][game->store.mx] == '1')
 		{
 			game->store.hx = game->store.rx;
@@ -51,7 +52,8 @@ void	loop_distance_v(t_game *game, int pix)
 			* game->map.grid_height + game->store.mx;
 		if (game->store.my >= 0
 			&& game->store.mx >= 0
-			&& game->store.mp < game->map.grid_height * game->map.grid_height
+			&& game->store.my < game->map.grid_height
+			&& game->store.mx < game->map.grid_height
 			&& game->map.grid[game->store.my][game->store.mx] == '1')
 		{
 			game->store.vx = game->store.rx;
@@ -141,7 +143,7 @@ void	draw_rays(t_game *game)
 		pick_v_or_h(game, pix);
 		game->store.r++;
 		draw_three_d(game, game->store.distance, game->store.ra);
-		game->store.ra += (DR / 24);
+		game->store.ra += (DR / 18);
 		if (game->store.ra < 0)
 			game->store.ra += 2 * PI;
 		if (game->store.ra > 2 * PI)
