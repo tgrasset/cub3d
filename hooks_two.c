@@ -1,0 +1,111 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hooks_two.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
+/*   Updated: 2023/03/27 09:38:41 by ael-youb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3D.h"
+
+void	strafe_left(t_game *game)
+{
+	int	mx;
+	int	my;
+
+	mx = (int)(game->player_x - (game->strafe_deltax * 2))
+		/ (512 / game->map.grid_height);
+	my = (int)(game->player_y - (game->strafe_deltay * 2))
+		/ (512 / game->map.grid_height);
+	if (mx < game->map.grid_height && mx > 0)
+	{
+		if (my < game->map.grid_height && my > 0)
+		{
+			if (game->map.grid[my][mx] == '0')
+			{
+				game->player_x -= game->strafe_deltax / 12;
+				game->player_y -= game->strafe_deltay / 12;
+			}
+		}
+	}
+}
+
+void	strafe_right(t_game *game)
+{
+	int	mx;
+	int	my;
+
+	mx = (int)(game->player_x + (game->strafe_deltax * 2))
+		/ (512 / game->map.grid_height);
+	my = (int)(game->player_y + (game->strafe_deltay * 2))
+		/ (512 / game->map.grid_height);
+	if (mx < game->map.grid_height && mx > 0)
+	{
+		if (my < game->map.grid_height && my > 0)
+		{
+			if (game->map.grid[my][mx] == '0')
+			{
+				game->player_x += game->strafe_deltax / 12;
+				game->player_y += game->strafe_deltay / 12;
+			}
+		}
+	}
+}
+
+void	move_player(t_game *game)
+{
+	if (game->forwd == 1)
+		go_forward(game);
+	if (game->backwd == 1)
+		go_backward(game);
+	if (game->look_l == 1)
+		turn_left(game);
+	if (game->look_r == 1)
+		turn_right(game);
+	if (game->strafe_l == 1)
+		strafe_left(game);
+	if (game->strafe_r)
+		strafe_right(game);
+}
+
+int	key_press(int keycode, t_game *game)
+{
+	if (keycode == XK_Left)
+		game->look_l = 1;
+	if (keycode == XK_Right)
+		game->look_r = 1;
+	if (keycode == XK_Down || keycode == XK_S)
+		game->backwd = 1;
+	if (keycode == XK_Up || keycode == XK_W)
+		game->forwd = 1;
+	if (keycode == 100)
+		game->strafe_r = 1;
+	if (keycode == 97)
+		game->strafe_l = 1;
+	if (keycode == XK_Escape)
+		close_program(game);
+	return (0);
+}
+
+int	key_release(int keycode, t_game *game)
+{
+	if (keycode == XK_Left)
+		game->look_l = 0;
+	if (keycode == XK_Right)
+		game->look_r = 0;
+	if (keycode == XK_Down || keycode == XK_S)
+		game->backwd = 0;
+	if (keycode == XK_Up || keycode == XK_W)
+		game->forwd = 0;
+	if (keycode == 100)
+		game->strafe_r = 0;
+	if (keycode == 97)
+		game->strafe_l = 0;
+	if (keycode == XK_Escape)
+		close_program(game);
+	return (0);
+}

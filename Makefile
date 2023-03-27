@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
+#    By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/20 10:59:04 by tgrasset         ###   ########.fr        #
+#    Updated: 2023/03/27 09:35:06 by ael-youb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,9 +23,13 @@ SRCS	=	./main.c \
 			./parsing/parsing_utils.c \
 			./parsing/copy_and_format_map.c \
 			./minilibx_functions.c \
+			./minilibx_more_functions.c \
+			./minilibx_last_file.c \
 			./hooks.c \
-      ./raycasting.c \
-      ./raycasting_utils.c \
+			./hooks_two.c \
+   	 		./raycasting.c \
+     	 	./raycasting_utils.c \
+			./utils.c \
 				
 OBJS	=	$(SRCS:%.c=%.o)
 

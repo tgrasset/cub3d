@@ -6,11 +6,16 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/25 22:38:18 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 09:33:53 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	rgb(int r, int g, int b)
+{
+	return ((r * 256 * 256) + (g * 256) + b);
+}
 
 //pick the shorted distance
 void	pick_v_or_h(t_game *game, int pix)
@@ -18,7 +23,6 @@ void	pick_v_or_h(t_game *game, int pix)
 	game->store.color = 0;
 	if (game->store.dis_v <= game->store.dis_h)
 	{
-		//printf("picking disv = %lf over dish = %lf\n", game->store.dis_v, game->store.dis_h);
 		game->store.rx = game->store.vx;
 		game->store.ry = game->store.vy;
 		game->store.distance = game->store.dis_v;
@@ -26,7 +30,6 @@ void	pick_v_or_h(t_game *game, int pix)
 	}
 	if (game->store.dis_v > game->store.dis_h)
 	{
-		//printf("picking dish = %lf over disv = %lf\n", game->store.dis_h, game->store.dis_v);
 		game->store.rx = game->store.hx;
 		game->store.ry = game->store.hy;
 		game->store.distance = game->store.dis_h;
@@ -42,11 +45,9 @@ void	init_draw_ray(t_game *game)
 	game->store.dis_h = 1000000;
 	game->store.hx = game->player_x;
 	game->store.hy = game->player_y;
-
 	game->store.dis_v = 1000000;
 	game->store.vx = game->player_x;
 	game->store.vy = game->player_y;
-	
 	game->store.ra = game->player_angle - DR * 30;
 	if (game->store.ra < 0)
 	{
@@ -88,7 +89,6 @@ void	reinitialize_distances(t_game *game)
 	game->store.dis_h = 1000000;
 	game->store.hx = game->player_x;
 	game->store.hy = game->player_y;
-
 	game->store.dis_v = 1000000;
 	game->store.vx = game->player_x;
 	game->store.vy = game->player_y;

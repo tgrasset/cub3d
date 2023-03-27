@@ -34,6 +34,18 @@
 # define DR 0.0174533 // 1 degre = DR radians
 # define RAY_NUMBER 720
 
+typedef struct s_minimap
+{
+	int			x;
+	int			y;
+	int			x_origin;
+	int			y_origin;
+	int			xo;
+	int			yo;
+	int			pix;
+	int			cases;
+}				t_minimap;
+
 typedef struct s_map
 {
 	char			*north;
@@ -42,6 +54,8 @@ typedef struct s_map
 	char			*west;
 	unsigned char	floor[3];
 	unsigned char	ceiling[3];
+	int				floor_int;
+	int				ceiling_int;
 	char			**content;
 	int				grid_height;
 	int				grid_width;
@@ -105,6 +119,9 @@ typedef struct s_game
 	float			player_deltax;
 	float			player_deltay;
 	float			player_angle;
+	float			strafe_angle;
+	float			strafe_deltax;
+	float			strafe_deltay;
 	t_raystorage	store;
 	int				forwd;
 	int				backwd;
@@ -116,15 +133,29 @@ typedef struct s_game
 
 //main
 void	select_player_dir(t_game *game);
+void	ceiling_floor_colors(t_game *game);
 
 //minilibx_functions
 void	init_mlx(t_game *game);
 int		render(t_game *game);
-void	draw_map(t_game *game);
-void	draw_player(t_game *game);
 void	draw_three_d(t_game *game, float distance, float ra);
+void	loop_draw_three_d(t_game *game, float height, float offset);
 void	pixel_put(t_data *data, int x, int y, int color);
+
+//minilibx_more_functions
+void	draw_player(t_game *game);
+void	draw_map(t_game *game);
+void	init_minimap(t_minimap *minimap, t_game *game);	
+void	load_textures(t_game *game);
+
+//minilibx_last_file
+void	loop_loop_drawthreed(t_game *game, float height, float offset, int j);
+
+//utils
 float	dist(float ax, float ay, float bx, float by);
+int		get_colour_from_texture(int height, t_data *data,
+			t_game *game, int wall_y);
+void	util_draw_player(t_game *game, int cases, int pix);
 
 //raycasting
 void	draw_rays(t_game *game);
@@ -138,24 +169,32 @@ void	pick_v_or_h(t_game *game, int pix);
 void	init_draw_ray(t_game *game);
 void	draw_minimap_dot(t_game *game);
 void	reinitialize_distances(t_game *game);
+int		rgb(int r, int g, int b);
 
 //hooks
 int		close_program(t_game *game);
+void	turn_left(t_game *game);
+void	turn_right(t_game *game);
+void	go_backward(t_game *game);
+void	go_forward(t_game *game);
+
+//hooks_two
+void	strafe_left(t_game *game);
+void	strafe_right(t_game *game);
+void	move_player(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
-void	go_forward(t_game *game);
-void	go_backward(t_game *game);
-void	move_player(t_game *game);
+
 
 // parsing functions
 
-void    free_tab(char **tab);
-void    free_map(t_map *map);
-void    parse_error(int n, t_map *map);
+void	free_tab(char **tab);
+void	free_map(t_map *map);
+void	parse_error(int n, t_map *map);
 void	parse_cub_file(int ac, char *path, t_map *map);
 void	set_rgb_values(t_map *map, char c, char *str, int i);
 void	init_map_structure(t_map *map);
-int     is_valid_extension(char *path);
+int		is_valid_extension(char *path);
 void	extract_cub_file_content(char *path, t_map *map);
 void	grid_char_check(char **c, t_map *map, int i, int j);
 char	*get_texture_path(char **content, char *dir, int i, t_map *map);
@@ -163,7 +202,7 @@ void	closed_map_check(char **grid, t_map *map, int x, int y);
 void	default_textures_paths_if_necessary(t_map *map);
 void	check_if_directory(char *path, t_map *map, int fd);
 int		skip_spaces(char *str, int i);
-void    useless_lines_check(char **content, t_map *map, int i);
+void	useless_lines_check(char **content, t_map *map, int i);
 void	copy_map_grid(char **src, t_map *map, int i, int j);
 
 #endif
