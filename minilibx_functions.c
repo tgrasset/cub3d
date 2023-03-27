@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 11:48:19 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:03:57 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	while (j < offset)
 	{
 		pixel_put(game->img, j, (game->store.r),
-			0x87CEEB);
+			game->map.ceiling_int);
 			j++;
 	}
 	loop_loop_drawthreed(game, height, offset, j);
@@ -36,7 +36,7 @@ void	loop_draw_three_d(t_game *game, float height, float offset)
 	while (j <= HEIGHT)
 	{
 		pixel_put(game->img, j, (game->store.r),
-			0x299c19);
+			game->map.floor_int);
 			j++;
 	}
 }
