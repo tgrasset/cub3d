@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 09:38:41 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:25:12 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ int	key_press(int keycode, t_game *game)
 		game->look_l = 1;
 	if (keycode == XK_Right)
 		game->look_r = 1;
-	if (keycode == XK_Down || keycode == XK_S)
+	if (keycode == XK_Down || keycode == XK_s)
 		game->backwd = 1;
-	if (keycode == XK_Up || keycode == XK_W)
+	if (keycode == XK_Up || keycode == XK_w)
 		game->forwd = 1;
-	if (keycode == 100)
+	if (keycode == XK_d)
 		game->strafe_r = 1;
-	if (keycode == 97)
+	if (keycode == XK_a)
 		game->strafe_l = 1;
 	if (keycode == XK_Escape)
 		close_program(game);
@@ -97,13 +97,13 @@ int	key_release(int keycode, t_game *game)
 		game->look_l = 0;
 	if (keycode == XK_Right)
 		game->look_r = 0;
-	if (keycode == XK_Down || keycode == XK_S)
+	if (keycode == XK_Down || keycode == XK_s)
 		game->backwd = 0;
-	if (keycode == XK_Up || keycode == XK_W)
+	if (keycode == XK_Up || keycode == XK_w)
 		game->forwd = 0;
-	if (keycode == 100)
+	if (keycode == XK_d)
 		game->strafe_r = 0;
-	if (keycode == 97)
+	if (keycode == XK_a)
 		game->strafe_l = 0;
 	if (keycode == XK_Escape)
 		close_program(game);

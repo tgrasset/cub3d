@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/27 09:01:47 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:24:25 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	select_player_dir(t_game *game)
 		game->strafe_angle = P2;
 		game->player_angle = 0;
 	}
-	if (game->map.p_dir == 'O')
+	if (game->map.p_dir == 'W')
 	{
 		game->strafe_angle = P3;
 		game->player_angle = PI;
