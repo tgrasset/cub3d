@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 16:25:59 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:48:13 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,30 +63,19 @@ void	draw_three_d(t_game *game, float distance, float ra)
 
 int	render(t_game *game)
 {
-	float	i;
-	float	j;
-
-	i = 0;
-	j = 0;
-	while (i < HEIGHT)
-	{
-		while (j < RAY_NUMBER)
-		{
-			pixel_put(game->img, i, j,
-				0x80808080);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
+	if (game->frame >= LOOP)
+		game->frame = 0;
 	if (game->focus == 1)
 		check_mouse_move(game);
 	move_player(game);
 	draw_rays(game);
+	if (game->map.sprite_nb != 0)
+		draw_sprites(game);
 	draw_map(game);
 	draw_player(game);
 	mlx_put_image_to_window(game->win->mlx,
 		game->win->mlx_win, game->img->img, 0, 0);
+	game->frame++;
 	return (0);
 }
 

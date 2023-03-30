@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:56:50 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/29 11:56:18 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:30:14 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,26 @@ void	check_surroundings(char **grid, t_map *map, int x, int y)
 		parse_error(6, map);
 }
 
+void	get_sprite_number(char **grid, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	map->sprite_nb = 0;
+	while (grid[i] != NULL)
+	{
+		j = 0;
+		while (grid[i][j] != '\0')
+		{
+			if (grid[i][j] == '2')
+				map->sprite_nb++;
+			j++;
+		}
+		i++;
+	}
+}
+
 void	closed_map_check(char **grid, t_map *map, int x, int y)
 {
 	while (grid[y + 1] != NULL)
@@ -77,4 +97,5 @@ void	closed_map_check(char **grid, t_map *map, int x, int y)
 		x++;
 	}
 	get_player_info(grid, map);
+	get_sprite_number(grid, map);
 }

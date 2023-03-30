@@ -3,8 +3,8 @@ NO ./textures/mur_moche.xpm
 SO ./textures/red_bricks.xpm
 EA ./textures/wood.xpm
 
-F 00,100,00000
-C 25,30,100
+F 0,100,0
+C 0,0,100
 
         1111111111111111111111111
         1000000000110000000000001

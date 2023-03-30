@@ -6,7 +6,7 @@
 #    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/27 16:26:47 by tgrasset         ###   ########.fr        #
+#    Updated: 2023/03/29 14:18:18 by tgrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS	=	./main.c \
      	 	./raycasting_utils.c \
 			./utils.c \
 			./mouse.c \
+			./sprites.c \
 				
 OBJS	=	$(SRCS:%.c=%.o)
 
