@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 12:46:27 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/30 02:01:49 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	go_backward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->player_deltax / 4;
-				game->player_y -= game->player_deltay / 4;
+				game->player_x -= game->player_deltax / game->sprint_mult;
+				game->player_y -= game->player_deltay / game->sprint_mult;
 			}
 		}
 	}
@@ -93,10 +93,10 @@ void	go_forward(t_game *game)
 	{
 		if (my < game->map.grid_height && my > 0)
 		{
-			if (game->map.grid[my][mx] == '0')
+			if (game->map.grid[my][mx] == '0' && check_wallhack(game))
 			{
-				game->player_x += game->player_deltax / 4;
-				game->player_y += game->player_deltay / 4;
+				game->player_x += game->player_deltax / game->sprint_mult;
+				game->player_y += game->player_deltay / game->sprint_mult;
 			}
 		}
 	}

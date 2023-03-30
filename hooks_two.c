@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 12:49:57 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/30 02:08:07 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	strafe_left(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->strafe_deltax / 4;
-				game->player_y -= game->strafe_deltay / 4;
+				game->player_x -= game->strafe_deltax / game->sprint_mult;
+				game->player_y -= game->strafe_deltay / game->sprint_mult;
 			}
 		}
 	}
@@ -49,8 +49,8 @@ void	strafe_right(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x += game->strafe_deltax / 4;
-				game->player_y += game->strafe_deltay / 4;
+				game->player_x += game->strafe_deltax / game->sprint_mult;
+				game->player_y += game->strafe_deltay / game->sprint_mult;
 			}
 		}
 	}
@@ -88,6 +88,8 @@ int	key_press(int keycode, t_game *game)
 		game->strafe_l = 1;
 	if (keycode == XK_Escape)
 		close_program(game);
+	if (keycode == 65505)
+		game->sprint_mult = 2;
 	return (0);
 }
 
@@ -105,5 +107,7 @@ int	key_release(int keycode, t_game *game)
 		game->strafe_r = 0;
 	if (keycode == XK_a)
 		game->strafe_l = 0;
+	if (keycode == 65505)
+		game->sprint_mult = 4;
 	return (0);
 }

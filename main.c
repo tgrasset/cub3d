@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/27 11:23:42 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/30 02:01:17 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	main(int ac, char **av)
 	game.strafe_r = 0;
 	game.look_l = 0;
 	game.look_r = 0;
+	game.pix = HEIGHT / game.map.grid_height;
+	game.sprint_mult = 4;
 	init_mlx(&game);
 	close_program(&game);
 	return (0);

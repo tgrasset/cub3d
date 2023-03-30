@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 09:33:53 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/30 01:22:51 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	rgb(int r, int g, int b)
 }
 
 //pick the shorted distance
-void	pick_v_or_h(t_game *game, int pix)
+void	pick_v_or_h(t_game *game)
 {
 	game->store.color = 0;
 	if (game->store.dis_v <= game->store.dis_h)
@@ -35,8 +35,8 @@ void	pick_v_or_h(t_game *game, int pix)
 		game->store.distance = game->store.dis_h;
 		game->store.color = 0;
 	}
-	game->store.mx = (int)(game->store.rx) / pix;
-	game->store.my = (int)(game->store.ry) / pix;
+	game->store.mx = (int)(game->store.rx) / game->pix;
+	game->store.my = (int)(game->store.ry) / game->pix;
 	game->store.mp = game->store.my * game->map.grid_height + game->store.mx;
 }
 
