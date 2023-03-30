@@ -32,6 +32,7 @@
 # define P3 4.7123889804
 # define DR 0.0174533 // 1 degre = DR radians
 # define RAY_NUMBER 1080
+# define SCALE_RAY 18
 # define HEIGHT 768
 # define LOOP 12
 
@@ -148,6 +149,8 @@ typedef struct s_game
 	int				strafe_r;
 	int				look_l;
 	int				look_r;
+	int				pix;
+	int				sprint_mult;
 	int				focus;
 	int				frame;
 	t_sprites		sprites;
@@ -181,13 +184,13 @@ void	util_draw_player(t_game *game, int cases, int pix);
 
 //raycasting
 void	draw_rays(t_game *game);
-void	distance_h(t_game *game, int pix);
-void	distance_v(t_game *game, int pix);
-void	loop_distance_v(t_game *game, int pix);
-void	loop_distance_h(t_game *game, int pix);
+void	distance_h(t_game *game);
+void	distance_v(t_game *game);
+void	loop_distance_v(t_game *game);
+void	loop_distance_h(t_game *game);
 
 //raycasting utils
-void	pick_v_or_h(t_game *game, int pix);
+void	pick_v_or_h(t_game *game);
 void	init_draw_ray(t_game *game);
 void	draw_minimap_dot(t_game *game);
 void	reinitialize_distances(t_game *game);
@@ -206,6 +209,9 @@ void	strafe_right(t_game *game);
 void	move_player(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
+
+//hooks_three
+int		check_wallhack(t_game *game);
 
 //mouse and sprites
 int		capture_mouse(int button, int x, int y, t_game *game);

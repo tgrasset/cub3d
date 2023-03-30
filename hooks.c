@@ -93,8 +93,8 @@ void	go_backward(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->player_deltax / 2;
-				game->player_y -= game->player_deltay / 2;
+				game->player_x -= game->player_deltax / game->sprint_mult;
+				game->player_y -= game->player_deltay / game->sprint_mult;
 			}
 		}
 	}
@@ -113,10 +113,10 @@ void	go_forward(t_game *game)
 	{
 		if (my < game->map.grid_height && my > 0)
 		{
-			if (game->map.grid[my][mx] == '0')
+			if (game->map.grid[my][mx] == '0' && check_wallhack(game))
 			{
-				game->player_x += game->player_deltax / 2;
-				game->player_y += game->player_deltay / 2;
+				game->player_x += game->player_deltax / game->sprint_mult;
+				game->player_y += game->player_deltay / game->sprint_mult;
 			}
 		}
 	}

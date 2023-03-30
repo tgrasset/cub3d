@@ -53,16 +53,37 @@ void	loop_minimap(t_game *game, t_minimap *minimap)
 	}
 }
 
+void	background_minimap(t_game *game, t_minimap *minimap)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < minimap->pix * minimap->cases * 2)
+	{
+		while (j < minimap->pix * minimap->cases * 2)
+		{
+			pixel_put(game->img, j, i,
+				0x00000000);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
 void	draw_map(t_game *game)
 {
 	t_minimap	minimap;
 
 	init_minimap(&minimap, game);
+	background_minimap(game, &minimap);
 	while (minimap.x < (int)(game->player_x)
-		/ (HEIGHT / game->map.grid_height) + minimap.cases)
+		/ minimap.pix + minimap.cases)
 	{
 		while (minimap.y < (int)(game->player_y) /
-			(HEIGHT / game->map.grid_height) + minimap.cases)
+			minimap.pix + minimap.cases)
 		{
 			minimap.xo = minimap.x_origin * minimap.pix;
 			minimap.yo = minimap.y_origin * minimap.pix;
@@ -139,11 +160,11 @@ void	draw_player(t_game *game)
 	int	pix;
 
 	cases = (game->map.grid_height / 6) * 2;
-	if (game->map.grid_height > 2 && cases / 2 < 2)
-		cases += 2;
-	pix = HEIGHT / (game->map.grid_height * 2);
-	if (pix > 50)
-		pix = 50;
+	if (game->map.grid_height > 2 && cases < 2)
+		cases++;
+	pix = game->pix / 2;
+	if (pix > 40)
+		pix = 40;
 	i = cases * pix + (pix);
 	j = cases * pix + (pix);
 	while (i < (cases * pix + (pix)) + 4)

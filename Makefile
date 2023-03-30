@@ -6,7 +6,7 @@
 #    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/29 14:18:18 by tgrasset         ###   ########.fr        #
+#    Updated: 2023/03/30 01:59:03 by ael-youb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS	=	./main.c \
 			./minilibx_last_file.c \
 			./hooks.c \
 			./hooks_two.c \
+			./hooks_three.c \
    	 		./raycasting.c \
      	 	./raycasting_utils.c \
 			./utils.c \

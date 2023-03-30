@@ -27,8 +27,8 @@ void	strafe_left(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x -= game->strafe_deltax / 4;
-				game->player_y -= game->strafe_deltay / 4;
+				game->player_x -= game->strafe_deltax / game->sprint_mult;
+				game->player_y -= game->strafe_deltay / game->sprint_mult;
 			}
 		}
 	}
@@ -49,8 +49,8 @@ void	strafe_right(t_game *game)
 		{
 			if (game->map.grid[my][mx] == '0')
 			{
-				game->player_x += game->strafe_deltax / 4;
-				game->player_y += game->strafe_deltay / 4;
+				game->player_x += game->strafe_deltax / game->sprint_mult;
+				game->player_y += game->strafe_deltay / game->sprint_mult;
 			}
 		}
 	}
@@ -88,6 +88,8 @@ int	key_press(int keycode, t_game *game)
 		game->strafe_l = 1;
 	if (keycode == XK_Escape)
 		close_program(game);
+	if (keycode == 65505)
+		game->sprint_mult = 2;
 	if (keycode && keycode != XK_Left && keycode != XK_Right
 		&& keycode != XK_Down && keycode != XK_s && keycode != XK_Up
 		&& keycode != XK_w && keycode != XK_d && keycode != XK_a
@@ -110,5 +112,7 @@ int	key_release(int keycode, t_game *game)
 		game->strafe_r = 0;
 	if (keycode == XK_a)
 		game->strafe_l = 0;
+	if (keycode == 65505)
+		game->sprint_mult = 4;
 	return (0);
 }
