@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:56:50 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 11:47:02 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:30:14 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	get_player_info(char **grid, t_map *map)
 
 int	out_of_map(char c)
 {
-	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W' && c != 'E')
+	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W' && c != 'E'
+		&& c != '2')
 		return (1);
 	return (0);
 }
@@ -53,6 +54,26 @@ void	check_surroundings(char **grid, t_map *map, int x, int y)
 		|| out_of_map(grid[y][x + 1]) || out_of_map(grid[y + 1][x + 1])
 		|| out_of_map(grid[y + 1][x]) || out_of_map(grid[y + 1][x - 1]))
 		parse_error(6, map);
+}
+
+void	get_sprite_number(char **grid, t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	map->sprite_nb = 0;
+	while (grid[i] != NULL)
+	{
+		j = 0;
+		while (grid[i][j] != '\0')
+		{
+			if (grid[i][j] == '2')
+				map->sprite_nb++;
+			j++;
+		}
+		i++;
+	}
 }
 
 void	closed_map_check(char **grid, t_map *map, int x, int y)
@@ -76,4 +97,5 @@ void	closed_map_check(char **grid, t_map *map, int x, int y)
 		x++;
 	}
 	get_player_info(grid, map);
+	get_sprite_number(grid, map);
 }

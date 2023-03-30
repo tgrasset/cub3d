@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_more_functions.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:05:53 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/30 02:40:07 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/29 13:10:22 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,23 @@ void	load_textures(t_game *game)
 			&game->east.w, &game->east.h);
 	game->west.img = mlx_xpm_file_to_image(game->win->mlx, game->map.west,
 			&game->west.w, &game->west.h);
+	game->sp_1.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/slime1.xpm",
+			&game->sp_1.w, &game->sp_1.h);
+	game->sp_2.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/slime2.xpm",
+			&game->sp_2.w, &game->sp_2.h);
+	game->sp_3.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/slime3.xpm",
+			&game->sp_3.w, &game->sp_3.h);
+	game->sp_4.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/slime4.xpm",
+			&game->sp_4.w, &game->sp_4.h);
+	game->sp_5.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/slime5.xpm",
+			&game->sp_5.w, &game->sp_5.h);
+	game->sp_6.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/slime6.xpm",
+			&game->sp_6.w, &game->sp_6.h);
 	if (game->north.img == NULL || game->south.img == NULL
-		|| game->east.img == NULL || game->west.img == NULL)
+		|| game->east.img == NULL || game->west.img == NULL
+		|| game->sp_1.img == NULL || game->sp_2.img == NULL
+		|| game->sp_3.img == NULL || game->sp_4.img == NULL
+		|| game->sp_5.img == NULL || game->sp_6.img == NULL)
 	{
 		ft_putendl_fd("Error\nTextures couldn't be loaded", 2);
 		close_program(game);
@@ -123,6 +138,18 @@ void	load_textures(t_game *game)
 			&game->east.ll, &game->east.endian);
 	game->west.addr = mlx_get_data_addr(game->west.img, &game->west.bpp,
 			&game->west.ll, &game->west.endian);
+	game->sp_1.addr = mlx_get_data_addr(game->sp_1.img, &game->sp_1.bpp,
+			&game->sp_1.ll, &game->sp_1.endian);
+	game->sp_2.addr = mlx_get_data_addr(game->sp_2.img, &game->sp_2.bpp,
+			&game->sp_2.ll, &game->sp_2.endian);
+	game->sp_3.addr = mlx_get_data_addr(game->sp_3.img, &game->sp_3.bpp,
+			&game->sp_3.ll, &game->sp_3.endian);
+	game->sp_4.addr = mlx_get_data_addr(game->sp_4.img, &game->sp_4.bpp,
+			&game->sp_4.ll, &game->sp_4.endian);
+	game->sp_5.addr = mlx_get_data_addr(game->sp_5.img, &game->sp_5.bpp,
+			&game->sp_5.ll, &game->sp_5.endian);
+	game->sp_6.addr = mlx_get_data_addr(game->sp_6.img, &game->sp_6.bpp,
+			&game->sp_6.ll, &game->sp_6.endian);
 }
 
 void	draw_player(t_game *game)

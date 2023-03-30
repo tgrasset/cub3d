@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
 /*   Updated: 2023/03/30 02:26:45 by ael-youb         ###   ########.fr       */
@@ -63,28 +63,19 @@ void	draw_three_d(t_game *game, float distance, float ra)
 
 int	render(t_game *game)
 {
-	float	i;
-	float	j;
-
-	i = 0;
-	j = 0;
-	while (i < HEIGHT)
-	{
-		while (j < RAY_NUMBER)
-		{
-			pixel_put(game->img, i, j,
-				0x80808080);
-			j++;
-		}
-		j = 0;
-		i++;
-	}
+	if (game->frame >= LOOP)
+		game->frame = 0;
+	if (game->focus == 1)
+		check_mouse_move(game);
 	move_player(game);
 	draw_rays(game);
+	if (game->map.sprite_nb != 0)
+		draw_sprites(game);
 	draw_map(game);
 	draw_player(game);
 	mlx_put_image_to_window(game->win->mlx,
 		game->win->mlx_win, game->img->img, 0, 0);
+	game->frame++;
 	return (0);
 }
 
@@ -101,6 +92,7 @@ void	init_mlx(t_game *game)
 	game->img = &img;
 	load_textures(game);
 	render(game);
+	mlx_hook(game->win->mlx_win, 4, 1L << 2, capture_mouse, game);
 	mlx_hook(win.mlx_win, 17, 0L, close_program, game);
 	mlx_hook(win.mlx_win, 2, 1L << 0, key_press, game);
 	mlx_loop_hook(win.mlx, render, game);

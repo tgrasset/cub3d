@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/30 02:08:07 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:13:04 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ int	key_press(int keycode, t_game *game)
 		close_program(game);
 	if (keycode == 65505)
 		game->sprint_mult = 2;
+	if (keycode && keycode != XK_Left && keycode != XK_Right
+		&& keycode != XK_Down && keycode != XK_s && keycode != XK_Up
+		&& keycode != XK_w && keycode != XK_d && keycode != XK_a
+		&& keycode != XK_Escape)
+		game->focus = 0;
 	return (0);
 }
 

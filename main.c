@@ -44,16 +44,35 @@ void	ceiling_floor_colors(t_game *game)
 			game->map.ceiling[1], game->map.ceiling[2]);
 }
 
+void	init_main_struct(t_game *game)
+{
+	game->player_y = HEIGHT / game->map.grid_height * game->map.p_y;
+	game->player_x = HEIGHT / game->map.grid_height * game->map.p_x;
+	game->store.dof_max = game->map.grid_height - 1;
+	game->sprites.order = NULL;
+	game->sprites.dist = NULL;
+	game->sprites.sp_x = NULL;
+	game->sprites.sp_y = NULL;	
+	game->backwd = 0;
+	game->forwd = 0;
+	game->strafe_l = 0;
+	game->strafe_r = 0;
+	game->look_l = 0;
+	game->look_r = 0;
+	game->focus = 0;
+	game->frame = 0;
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
 
 	parse_cub_file(ac, av[1], &game.map);
-	game.player_y = HEIGHT / game.map.grid_height * game.map.p_y;
-	game.player_x = HEIGHT / game.map.grid_height * game.map.p_x;
-	game.store.dof_max = game.map.grid_height - 1;
+	init_main_struct(&game);
 	select_player_dir(&game);
 	ceiling_floor_colors(&game);
+	if (game.map.sprite_nb > 0)
+		init_sprite_struct(&game, 0, 0, 0);
 	game.player_deltax = cos(game.player_angle) * 5;
 	game.player_deltay = sin(game.player_angle) * 5;
 	game.strafe_deltax = cos(game.strafe_angle) * 5;
