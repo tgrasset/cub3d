@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/20 10:56:34 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/30 17:55:01 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 # include <X11/keysym.h>
 # include <X11/keysymdef.h>
 
-
 # define PI 3.1415926535
-# define P2 PI/2
-# define P3 3*PI/2
+# define P2 1.5707963268
+# define P3 4.7123889804
 # define DR 0.0174533 // 1 degre = DR radians
 # define RAY_NUMBER 1080
 # define HEIGHT 768
+# define LOOP 12
 
 typedef struct s_minimap
 {
@@ -65,6 +65,7 @@ typedef struct s_map
 	int				p_x;
 	int				p_y;
 	char			p_dir;
+	int				sprite_nb;
 }				t_map;
 
 typedef struct s_data {
@@ -87,7 +88,7 @@ typedef struct s_raystorage
 	int		r;
 	int		mx;
 	int		my;
-	int		mp; //useless dans un char **, utiliser mx/my
+	int		mp;
 	int		dof;
 	int		dof_max;
 	int		color;
@@ -106,6 +107,17 @@ typedef struct s_raystorage
 	int		actual_height;
 }				t_raystorage;
 
+typedef struct	s_sprites
+{
+	int		*order;
+	float	*dist;
+	float	*sp_x;
+	float	*sp_y;
+	float	rel_x;
+	float	rel_y;
+	int		height;
+}				t_sprites;
+
 typedef struct s_game
 {
 	t_map			map;
@@ -115,6 +127,12 @@ typedef struct s_game
 	t_data			south;
 	t_data			east;
 	t_data			west;
+	t_data			sp_1;
+	t_data			sp_2;
+	t_data			sp_3;
+	t_data			sp_4;
+	t_data			sp_5;
+	t_data			sp_6;
 	float			player_x;
 	float			player_y;
 	float			player_deltax;
@@ -130,6 +148,9 @@ typedef struct s_game
 	int				strafe_r;
 	int				look_l;
 	int				look_r;
+	int				focus;
+	int				frame;
+	t_sprites		sprites;
 }				t_game;
 
 //main
@@ -186,6 +207,11 @@ void	move_player(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 
+//mouse and sprites
+int		capture_mouse(int button, int x, int y, t_game *game);
+void	check_mouse_move(t_game *game);
+void	draw_sprites(t_game *game);
+void	init_sprite_struct(t_game *game, int i, int j, int k);
 
 // parsing functions
 

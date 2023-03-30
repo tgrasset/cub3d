@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:30:27 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/16 11:46:54 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/29 14:09:57 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	fill_value_tab(char *val, char *str, int i)
 		val[1] = str[1];
 		val[2] = '\0';
 	}
-	else
+	else if (i == 3)
 	{
 		val[1] = str[1];
 		val[2] = str[2];
@@ -45,7 +45,7 @@ void	add_value(char *val, char *str, t_map *map, int end_flag)
 		i++;
 	if (i - j > 3 || i == 0)
 		parse_error(4, map);
-	fill_value_tab(val, &str[j], j);
+	fill_value_tab(val, &str[j], i - j);
 	if (ft_atoi(val) > 255)
 		parse_error(4, map);
 	if (end_flag == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:03:21 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 10:54:15 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:43:04 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	get_colour_from_texture(int height, t_data *data, t_game *game, int wall_y)
 	char			*dst;
 	int				x;
 	int				y;
-	unsigned int	res;
 	float			tmp;
 
 	if (game->store.distance == game->store.dis_h)
@@ -31,6 +30,8 @@ int	get_colour_from_texture(int height, t_data *data, t_game *game, int wall_y)
 		tmp = game->store.ry / (HEIGHT / (game->map.grid_width));
 	tmp -= (int)tmp;
 	tmp *= 1000;
+	if (data == &game->north || data == &game->west)
+		tmp = 1000 - tmp;
 	y = (int)tmp;
 	y = data->w * y / 1000;
 	if (height == game->store.actual_height)
@@ -39,8 +40,7 @@ int	get_colour_from_texture(int height, t_data *data, t_game *game, int wall_y)
 		x = (wall_y + ((game->store.actual_height - height) / 2))
 			* data->h / game->store.actual_height;
 	dst = data->addr + (x * data->ll + y * (data->bpp / 8));
-	res = *(unsigned int *)dst;
-	return (res);
+	return (*(unsigned int *)dst);
 }
 
 void	util_draw_player(t_game *game, int cases, int pix)
