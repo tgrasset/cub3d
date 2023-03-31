@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 23:05:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/30 01:22:51 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:31:43 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	init_draw_ray(t_game *game)
 	game->store.dis_v = 1000000;
 	game->store.vx = game->player_x;
 	game->store.vy = game->player_y;
-	game->store.ra = game->player_angle - DR * 30;
+	game->store.ra = game->player_angle - (((DR / game->scale_ray) * RAY_NUMBER) / 2);
 	if (game->store.ra < 0)
 	{
 		game->store.ra += 2 * PI;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
+#    By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/30 01:59:03 by ael-youb         ###   ########.fr        #
+#    Updated: 2023/03/30 23:50:01 by ael-youb         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ SRCS	=	./main.c \
 			./hooks.c \
 			./hooks_two.c \
 			./hooks_three.c \
+			./hooks_four.c \
+			./hooks_five.c \
    	 		./raycasting.c \
      	 	./raycasting_utils.c \
 			./utils.c \

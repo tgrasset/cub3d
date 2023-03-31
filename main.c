@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/30 02:01:17 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:40:24 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ceiling_floor_colors(t_game *game)
 			game->map.ceiling[1], game->map.ceiling[2]);
 }
 
-void	init_main_struct(t_game *game)
+void	init_player_struct(t_game *game)
 {
 	game->player_y = HEIGHT / game->map.grid_height * game->map.p_y;
 	game->player_x = HEIGHT / game->map.grid_height * game->map.p_x;
@@ -63,28 +63,36 @@ void	init_main_struct(t_game *game)
 	game->frame = 0;
 }
 
+void	init_game_struct(t_game *game)
+{
+	game->player_deltax = cos(game->player_angle) * 5;
+	game->player_deltay = sin(game->player_angle) * 5;
+	game->strafe_deltax = cos(game->strafe_angle) * 5;
+	game->strafe_deltay = sin(game->strafe_angle) * 5;
+	game->backwd = 0;
+	game->forwd = 0;
+	game->strafe_l = 0;
+	game->strafe_r = 0;
+	game->look_l = 0;
+	game->look_r = 0;
+	game->pix = HEIGHT / game->map.grid_height;
+	game->sprint_mult = 4;
+	game->scale_ray = (game->map.grid_height / 2) + 2;
+	if (game->scale_ray < 8)
+		game->scale_ray = 8;
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
 
 	parse_cub_file(ac, av[1], &game.map);
-	init_main_struct(&game);
+	init_player_struct(&game);
 	select_player_dir(&game);
 	ceiling_floor_colors(&game);
 	if (game.map.sprite_nb > 0)
 		init_sprite_struct(&game, 0, 0, 0);
-	game.player_deltax = cos(game.player_angle) * 5;
-	game.player_deltay = sin(game.player_angle) * 5;
-	game.strafe_deltax = cos(game.strafe_angle) * 5;
-	game.strafe_deltay = sin(game.strafe_angle) * 5;
-	game.backwd = 0;
-	game.forwd = 0;
-	game.strafe_l = 0;
-	game.strafe_r = 0;
-	game.look_l = 0;
-	game.look_r = 0;
-	game.pix = HEIGHT / game.map.grid_height;
-	game.sprint_mult = 4;
+	init_game_struct(&game);
 	init_mlx(&game);
 	close_program(&game);
 	return (0);

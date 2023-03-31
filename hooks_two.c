@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:34:36 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 16:13:04 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/30 23:59:49 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	strafe_left(t_game *game)
 	{
 		if (my < game->map.grid_height && my > 0)
 		{
-			if (game->map.grid[my][mx] == '0')
+			if (game->map.grid[my][mx] == '0' && check_wallhack_strafel(game))
 			{
 				game->player_x -= game->strafe_deltax / game->sprint_mult;
 				game->player_y -= game->strafe_deltay / game->sprint_mult;
@@ -47,7 +47,7 @@ void	strafe_right(t_game *game)
 	{
 		if (my < game->map.grid_height && my > 0)
 		{
-			if (game->map.grid[my][mx] == '0')
+			if (game->map.grid[my][mx] == '0' && check_wallhack_strafer(game))
 			{
 				game->player_x += game->strafe_deltax / game->sprint_mult;
 				game->player_y += game->strafe_deltay / game->sprint_mult;

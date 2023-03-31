@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/30 17:55:01 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/03/31 00:37:27 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct s_game
 	float			strafe_deltax;
 	float			strafe_deltay;
 	t_raystorage	store;
+	int				scale_ray;
 	int				forwd;
 	int				backwd;
 	int				strafe_l;
@@ -159,6 +160,8 @@ typedef struct s_game
 //main
 void	select_player_dir(t_game *game);
 void	ceiling_floor_colors(t_game *game);
+void	init_game_struct(t_game *game);
+void	init_player_struct(t_game *game);
 
 //minilibx_functions
 void	init_mlx(t_game *game);
@@ -212,6 +215,21 @@ int		key_release(int keycode, t_game *game);
 
 //hooks_three
 int		check_wallhack(t_game *game);
+int		check_angle_leftx(t_game *game);
+int		check_angle_lefty(t_game *game);
+int		check_angle_rightx(t_game *game);
+int		check_angle_righty(t_game *game);
+
+//hooks_four
+int		check_wallhack_backward(t_game *game);
+int		check_angle_righty_s(t_game *game);
+int		check_angle_rightx_s(t_game *game);
+int		check_angle_lefty_s(t_game *game);
+int		check_angle_leftx_s(t_game *game);
+
+//hooks_five
+int		check_wallhack_strafel(t_game *game);
+int		check_wallhack_strafer(t_game *game);
 
 //mouse and sprites
 int		capture_mouse(int button, int x, int y, t_game *game);
