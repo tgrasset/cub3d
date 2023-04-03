@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:05:53 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/03 15:26:53 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:09:54 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 void	init_minimap(t_minimap *minimap, t_game *game)
 {
-	minimap->cases = (game->map.grid_height / 6);
-	if (minimap->cases < 2)
-		minimap->cases++;
+	minimap->cases = 3;
+	if (game->map.grid_height < 6)
+		minimap->cases = game->map.grid_height / 2;
 	minimap->x = (int)(game->player_x) / game->pix;
 	minimap->y = (int)(game->player_y) / game->pix;
 	minimap->x = minimap->x - minimap->cases;
 	minimap->y = minimap->y - minimap->cases;
 	minimap->x_origin = 0;
 	minimap->y_origin = 0;
-	minimap->pix = game->pix / 2;
-	if (minimap->pix > 50)
-		minimap->pix = 50;
+	minimap->pix = game->pix;
 }
 
 void	loop_minimap(t_game *game, t_minimap *minimap)
@@ -39,7 +37,7 @@ void	loop_minimap(t_game *game, t_minimap *minimap)
 			if (minimap->y < 0 || minimap->y >= game->map.grid_height)
 				break ;
 			pixel_put(game->img, minimap->yo, minimap->xo,
-				0x00000000);
+				0x88800000);
 			if (game->map.grid[minimap->y][minimap->x] == '1')
 				pixel_put(game->img, minimap->yo, minimap->xo,
 					0x88800000);
@@ -65,7 +63,7 @@ void	background_minimap(t_game *game, t_minimap *minimap)
 		while (j < minimap->pix * minimap->cases * 2)
 		{
 			pixel_put(game->img, j, i,
-				0x00000000);
+				0x88800000);
 			j++;
 		}
 		j = 0;
@@ -159,24 +157,22 @@ void	draw_player(t_game *game)
 	int	cases;
 	int	pix;
 
-	cases = (game->map.grid_height / 6) * 2;
-	if (game->map.grid_height > 2 && cases < 2)
-		cases++;
-	pix = game->pix / 2;
-	if (pix > 40)
-		pix = 40;
-	i = cases * pix + (pix);
-	j = cases * pix + (pix);
-	while (i < (cases * pix + (pix)) + 4)
+	cases = 3;
+	if (game->map.grid_height < 6)
+		cases = game->map.grid_height / 2;
+	pix = game->pix;
+	i = cases * pix + (pix / 2);
+	j = cases * pix + (pix / 2);
+	while (i < (cases * pix + (pix / 2)) + 4)
 	{
-		while (j < (cases * pix + (pix)) + 4)
+		while (j < (cases * pix + (pix / 2)) + 4)
 		{
 			pixel_put(game->img, i, j,
 				0x80090888);
 			j++;
 		}
-		j = cases * pix + (pix);
+		j = cases * pix + (pix / 2);
 		i++;
 	}
-	util_draw_player(game, cases, pix);
+	//util_draw_player(game, cases, pix);
 }
