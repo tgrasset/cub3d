@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/31 00:37:27 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 18:17:05 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ typedef struct s_raystorage
 	int		actual_height;
 }				t_raystorage;
 
-typedef struct	s_sprites
+typedef struct s_sprites
 {
 	int		*order;
 	float	*dist;
@@ -163,26 +163,20 @@ void	ceiling_floor_colors(t_game *game);
 void	init_game_struct(t_game *game);
 void	init_player_struct(t_game *game);
 
-//minilibx_functions
+//init_game.c
 void	init_mlx(t_game *game);
 int		render(t_game *game);
 void	draw_three_d(t_game *game, float distance, float ra);
 void	loop_draw_three_d(t_game *game, float height, float offset);
 void	pixel_put(t_data *data, int x, int y, int color);
 
-//minilibx_more_functions
+//minimap.c
 void	draw_player(t_game *game);
 void	draw_map(t_game *game);
 void	init_minimap(t_minimap *minimap, t_game *game);	
 void	load_textures(t_game *game);
-
-//minilibx_last_file
-void	loop_loop_drawthreed(t_game *game, float height, float offset, int j);
-
-//utils
-float	dist(float ax, float ay, float bx, float by);
-int		get_colour_from_texture(int height, t_data *data,
-			t_game *game, int wall_y);
+void	draw_player(t_game *game);
+void	draw_minimap_dot(t_game *game);
 void	util_draw_player(t_game *game, int cases, int pix);
 
 //raycasting
@@ -191,51 +185,56 @@ void	distance_h(t_game *game);
 void	distance_v(t_game *game);
 void	loop_distance_v(t_game *game);
 void	loop_distance_h(t_game *game);
-
-//raycasting utils
 void	pick_v_or_h(t_game *game);
 void	init_draw_ray(t_game *game);
-void	draw_minimap_dot(t_game *game);
 void	reinitialize_distances(t_game *game);
 int		rgb(int r, int g, int b);
+void	ray_special_case(t_game *game);
+float	dist(float ax, float ay, float bx, float by);
+int		get_colour_from_texture(int height, t_data *data,
+			t_game *game, int wall_y);
+void	loop_loop_drawthree_d(t_game *game, float height, float offset, int j);
 
 //hooks
 int		close_program(t_game *game);
-void	turn_left(t_game *game);
-void	turn_right(t_game *game);
-void	go_backward(t_game *game);
-void	go_forward(t_game *game);
-
-//hooks_two
-void	strafe_left(t_game *game);
-void	strafe_right(t_game *game);
-void	move_player(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
 
-//hooks_three
+//player_move
+void	go_backward(t_game *game);
+void	go_forward(t_game *game);
+void	strafe_left(t_game *game);
+void	strafe_right(t_game *game);
+void	move_player(t_game *game);
+
+//player_rotate
+void	turn_left(t_game *game);
+void	turn_right(t_game *game);
+
+//wall_secure
 int		check_wallhack(t_game *game);
-int		check_angle_leftx(t_game *game);
-int		check_angle_lefty(t_game *game);
+int		check_wallhack_backward(t_game *game);
+int		check_wallhack_strafe_l(t_game *game);
+int		check_wallhack_strafe_r(t_game *game);
+
+//wall_secure_right
+int		check_angle_righty_s(t_game *game);
+int		check_angle_rightx_s(t_game *game);
 int		check_angle_rightx(t_game *game);
 int		check_angle_righty(t_game *game);
 
-//hooks_four
-int		check_wallhack_backward(t_game *game);
-int		check_angle_righty_s(t_game *game);
-int		check_angle_rightx_s(t_game *game);
+//wall_secure_left
+int		check_angle_leftx(t_game *game);
+int		check_angle_lefty(t_game *game);
 int		check_angle_lefty_s(t_game *game);
 int		check_angle_leftx_s(t_game *game);
-
-//hooks_five
-int		check_wallhack_strafel(t_game *game);
-int		check_wallhack_strafer(t_game *game);
 
 //mouse and sprites
 int		capture_mouse(int button, int x, int y, t_game *game);
 void	check_mouse_move(t_game *game);
-void	draw_sprites(t_game *game);
+void	draw_sprites(t_game *game, int i);
 void	init_sprite_struct(t_game *game, int i, int j, int k);
+void	check_distance_and_sort(t_game *game, int i);
 
 // parsing functions
 

@@ -3,14 +3,75 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/03 15:08:42 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:03:00 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	key_press(int keycode, t_game *game)
+{
+	if (keycode == XK_Left)
+		game->look_l = 1;
+	if (keycode == XK_Right)
+		game->look_r = 1;
+	if (keycode == XK_Down || keycode == XK_s)
+		game->backwd = 1;
+	if (keycode == XK_Up || keycode == XK_w)
+		game->forwd = 1;
+	if (keycode == XK_d)
+		game->strafe_r = 1;
+	if (keycode == XK_a)
+		game->strafe_l = 1;
+	if (keycode == XK_Escape)
+		close_program(game);
+	if (keycode == 65505)
+		game->sprint_mult = 2;
+	if (keycode && keycode != XK_Left && keycode != XK_Right
+		&& keycode != XK_Down && keycode != XK_s && keycode != XK_Up
+		&& keycode != XK_w && keycode != XK_d && keycode != XK_a
+		&& keycode != XK_Escape && keycode != 65505)
+		game->focus = 0;
+	return (0);
+}
+
+int	key_release(int keycode, t_game *game)
+{
+	if (keycode == XK_Left)
+		game->look_l = 0;
+	if (keycode == XK_Right)
+		game->look_r = 0;
+	if (keycode == XK_Down || keycode == XK_s)
+		game->backwd = 0;
+	if (keycode == XK_Up || keycode == XK_w)
+		game->forwd = 0;
+	if (keycode == XK_d)
+		game->strafe_r = 0;
+	if (keycode == XK_a)
+		game->strafe_l = 0;
+	if (keycode == 65505)
+		game->sprint_mult = 4;
+	return (0);
+}
+
+void	close_program_2(t_game *game)
+{
+	if (game->sprites.dist != NULL)
+		free(game->sprites.dist);
+	if (game->sprites.order != NULL)
+		free(game->sprites.order);
+	if (game->sprites.sp_x != NULL)
+		free(game->sprites.sp_x);
+	if (game->sprites.sp_y != NULL)
+		free(game->sprites.sp_y);
+	mlx_destroy_display(game->win->mlx);
+	free(game->win->mlx);
+	free_map(&game->map);
+	exit(0);
+}
 
 int	close_program(t_game *game)
 {
@@ -36,88 +97,6 @@ int	close_program(t_game *game)
 		mlx_destroy_image(game->win->mlx, game->sp_5.img);
 	if (game->sp_6.img != NULL)
 		mlx_destroy_image(game->win->mlx, game->sp_6.img);
-	if (game->sprites.dist != NULL)
-		free(game->sprites.dist);
-	if (game->sprites.order != NULL)
-		free(game->sprites.order);
-	if (game->sprites.sp_x != NULL)
-		free(game->sprites.sp_x);
-	if (game->sprites.sp_y != NULL)
-		free(game->sprites.sp_y);
-	mlx_destroy_display(game->win->mlx);
-	free(game->win->mlx);
-	free_map(&game->map);
-	exit(1);
-}
-
-void	turn_left(t_game *game)
-{
-	game->player_angle -= ((DR / game->scale_ray) * 30);
-	game->strafe_angle -= ((DR / game->scale_ray) * 30);
-	if (game->player_angle < 0)
-		game->player_angle += 2 * PI;
-	if (game->strafe_angle < 0)
-		game->strafe_angle += 2 * PI;
-	game->player_deltax = cos(game->player_angle) * 5;
-	game->player_deltay = sin(game->player_angle) * 5;
-	game->strafe_deltax = cos(game->strafe_angle) * 5;
-	game->strafe_deltay = sin(game->strafe_angle) * 5;
-}
-
-void	turn_right(t_game *game)
-{
-	game->player_angle += ((DR / game->scale_ray) * 30);
-	game->strafe_angle += ((DR / game->scale_ray) * 30);
-	if (game->player_angle > 2 * PI)
-		game->player_angle -= 2 * PI;
-	if (game->strafe_angle > 2 * PI)
-		game->strafe_angle -= 2 * PI;
-	game->player_deltax = cos(game->player_angle) * 5;
-	game->player_deltay = sin(game->player_angle) * 5;
-	game->strafe_deltax = cos(game->strafe_angle) * 5;
-	game->strafe_deltay = sin(game->strafe_angle) * 5;
-}
-
-void	go_backward(t_game *game)
-{
-	int	mx;
-	int	my;
-
-	mx = (int)(game->player_x - (game->player_deltax * 2))
-		/ game->pix;
-	my = (int)(game->player_y - (game->player_deltay * 2))
-		/ game->pix;
-	if (mx < game->map.grid_height && mx > 0)
-	{
-		if (my < game->map.grid_height && my > 0)
-		{
-			if (game->map.grid[my][mx] == '0' && check_wallhack_backward(game))
-			{
-				game->player_x -= game->player_deltax / game->sprint_mult;
-				game->player_y -= game->player_deltay / game->sprint_mult;
-			}
-		}
-	}
-}
-
-void	go_forward(t_game *game)
-{
-	int	mx;
-	int	my;
-
-	mx = (int)(game->player_x + (game->player_deltax * 2))
-		/ game->pix;
-	my = (int)(game->player_y + (game->player_deltay * 2))
-		/ game->pix;
-	if (mx < game->map.grid_height && mx > 0)
-	{
-		if (my < game->map.grid_height && my > 0)
-		{
-			if (game->map.grid[my][mx] == '0' && check_wallhack(game))
-			{
-				game->player_x += game->player_deltax / game->sprint_mult;
-				game->player_y += game->player_deltay / game->sprint_mult;
-			}
-		}
-	}
+	close_program_2(game);
+	return (0);
 }

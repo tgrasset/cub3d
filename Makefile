@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+         #
+#    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/03/30 23:50:01 by ael-youb         ###   ########.fr        #
+#    Updated: 2023/04/03 17:49:30 by tgrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,19 +22,21 @@ SRCS	=	./main.c \
 			./parsing/closed_map_check.c \
 			./parsing/parsing_utils.c \
 			./parsing/copy_and_format_map.c \
-			./minilibx_functions.c \
-			./minilibx_more_functions.c \
-			./minilibx_last_file.c \
+			./init_game.c \
+			./player_move.c \
+			./player_rotate.c \
+			./minimap.c \
+			./render_3D.c \
 			./hooks.c \
-			./hooks_two.c \
-			./hooks_three.c \
-			./hooks_four.c \
-			./hooks_five.c \
+			./wall_secure.c \
+			./wall_secure_utils_left.c \
+			./wall_secure_utils_right.c \
    	 		./raycasting.c \
-     	 	./raycasting_utils.c \
-			./utils.c \
+			./ray_distance.c \
+			./ray_distance_utils.c \
 			./mouse.c \
 			./sprites.c \
+			./sprites_sort.c \
 				
 OBJS	=	$(SRCS:%.c=%.o)
 
