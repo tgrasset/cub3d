@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 23:49:28 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/30 23:55:41 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:41 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	check_wallhack_strafel(t_game *game)
 	int	my_two;
 
 	mx = (int)(game->player_x - check_angle_leftx_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my = (int)(game->player_y - check_angle_lefty_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	mx_two = (int)(game->player_x - check_angle_rightx_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my_two = (int)(game->player_y - check_angle_righty_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	if (mx < game->map.grid_height && mx > 0
 		&& mx_two < game->map.grid_height && mx_two > 0)
 	{
@@ -49,13 +49,13 @@ int	check_wallhack_strafer(t_game *game)
 	int	my_two;
 
 	mx = (int)(game->player_x + check_angle_leftx_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my = (int)(game->player_y + check_angle_lefty_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	mx_two = (int)(game->player_x + check_angle_rightx_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my_two = (int)(game->player_y + check_angle_righty_s(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	if (mx < game->map.grid_height && mx > 0
 		&& mx_two < game->map.grid_height && mx_two > 0)
 	{

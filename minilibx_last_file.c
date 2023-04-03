@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:25:55 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 12:57:01 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:48 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	loop_loop_drawthreed(t_game *game, float height, float offset, int j)
 	float	px;
 	float	py;
 
-	px = (game->player_x) / (HEIGHT / game->map.grid_height);
-	py = (game->player_y) / (HEIGHT / game->map.grid_height);
+	px = (game->player_x) / game->pix;
+	py = (game->player_y) / game->pix;
 	while (j < height + offset)
 	{
 		if (game->store.distance == game->store.dis_h && py > game->store.my)

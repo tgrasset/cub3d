@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/30 01:58:30 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/30 23:28:51 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:42 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,13 @@ int	check_wallhack(t_game *game)
 	int	my_two;
 
 	mx = (int)(game->player_x + check_angle_leftx(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my = (int)(game->player_y + check_angle_lefty(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	mx_two = (int)(game->player_x + check_angle_rightx(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my_two = (int)(game->player_y + check_angle_righty(game))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	if (mx < game->map.grid_height && mx > 0
 		&& mx_two < game->map.grid_height && mx_two > 0)
 	{

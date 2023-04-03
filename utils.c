@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:03:21 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/27 13:43:04 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:09:40 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	get_colour_from_texture(int height, t_data *data, t_game *game, int wall_y)
 	float			tmp;
 
 	if (game->store.distance == game->store.dis_h)
-		tmp = game->store.rx / (HEIGHT / (game->map.grid_width));
+		tmp = game->store.rx / game->pix;
 	else
-		tmp = game->store.ry / (HEIGHT / (game->map.grid_width));
+		tmp = game->store.ry / game->pix;
 	tmp -= (int)tmp;
 	tmp *= 1000;
 	if (data == &game->north || data == &game->west)
@@ -48,17 +48,17 @@ void	util_draw_player(t_game *game, int cases, int pix)
 	int	i;
 	int	j;
 
-	i = cases * pix + pix + game->player_deltax;
-	j = cases * pix + pix + game->player_deltay;
-	while (i < ((cases * pix + pix) + 3) + game->player_deltax)
+	i = cases * pix + (pix / 2) + game->player_deltax;
+	j = cases * pix + (pix / 2) + game->player_deltay;
+	while (i < ((cases * pix + (pix / 2)) + 3) + game->player_deltax)
 	{
-		while (j < ((cases * pix + pix) + 3) + game->player_deltay)
+		while (j < ((cases * pix + (pix / 2)) + 3) + game->player_deltay)
 		{
 			pixel_put(game->img, j, i,
 				0x00FF0000);
 			j++;
 		}
-		j = cases * pix + pix + game->player_deltay;
+		j = cases * pix + (pix / 2) + game->player_deltay;
 		i++;
 	}
 }

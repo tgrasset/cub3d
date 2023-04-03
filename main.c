@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/31 00:40:24 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 16:10:39 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ceiling_floor_colors(t_game *game)
 
 void	init_player_struct(t_game *game)
 {
-	game->player_y = HEIGHT / game->map.grid_height * game->map.p_y;
-	game->player_x = HEIGHT / game->map.grid_height * game->map.p_x;
+	game->player_y = 30 * game->map.p_y;
+	game->player_x = 30 * game->map.p_x;
 	game->store.dof_max = game->map.grid_height - 1;
 	game->sprites.order = NULL;
 	game->sprites.dist = NULL;
@@ -75,11 +75,12 @@ void	init_game_struct(t_game *game)
 	game->strafe_r = 0;
 	game->look_l = 0;
 	game->look_r = 0;
-	game->pix = HEIGHT / game->map.grid_height;
+	game->pix = 30;
 	game->sprint_mult = 4;
-	game->scale_ray = (game->map.grid_height / 2) + 2;
+	/* game->scale_ray = (game->map.grid_height / 2) + 2;
 	if (game->scale_ray < 8)
-		game->scale_ray = 8;
+		game->scale_ray = 8; */
+	game->scale_ray = 18;
 }
 
 int	main(int ac, char **av)
