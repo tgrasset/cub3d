@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_more_functions.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:05:53 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/29 13:10:22 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:49 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	init_minimap(t_minimap *minimap, t_game *game)
 	minimap->cases = (game->map.grid_height / 6);
 	if (minimap->cases < 2)
 		minimap->cases++;
-	minimap->x = (int)(game->player_x) / (HEIGHT / game->map.grid_height);
-	minimap->y = (int)(game->player_y) / (HEIGHT / game->map.grid_height);
+	minimap->x = (int)(game->player_x) / game->pix;
+	minimap->y = (int)(game->player_y) / game->pix;
 	minimap->x = minimap->x - minimap->cases;
 	minimap->y = minimap->y - minimap->cases;
 	minimap->x_origin = 0;
@@ -94,7 +94,7 @@ void	draw_map(t_game *game)
 		minimap.x++;
 		minimap.x_origin++;
 		minimap.y_origin = 0;
-		minimap.y = (int)(game->player_y) / (HEIGHT / game->map.grid_height);
+		minimap.y = (int)(game->player_y) / game->pix;
 		minimap.y = minimap.y - minimap.cases;
 	}
 }

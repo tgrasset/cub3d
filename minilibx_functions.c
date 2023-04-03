@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minilibx_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/30 02:26:45 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:10:14 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	render(t_game *game)
 	draw_rays(game);
 	if (game->map.sprite_nb != 0)
 		draw_sprites(game);
-	draw_map(game);
-	draw_player(game);
+	//draw_map(game);
+	//draw_player(game);
 	mlx_put_image_to_window(game->win->mlx,
 		game->win->mlx_win, game->img->img, 0, 0);
 	game->frame++;

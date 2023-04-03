@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:16:51 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/30 18:24:47 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:52 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	init_sprite_struct(t_game *game, int i, int j, int k)
 		{
 			if (game->map.grid[i][j] == '2')
 			{
-				game->sprites.sp_x[k] = HEIGHT / game->map.grid_height * (float)j;
-				game->sprites.sp_y[k] = HEIGHT / game->map.grid_height * (float)i;
+				game->sprites.sp_x[k] = game->pix * (float)j;
+				game->sprites.sp_y[k] = game->pix * (float)i;
 				k++;
 			}
 			j++;

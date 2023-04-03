@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/03/31 00:39:25 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:08:42 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	go_backward(t_game *game)
 	int	my;
 
 	mx = (int)(game->player_x - (game->player_deltax * 2))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my = (int)(game->player_y - (game->player_deltay * 2))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	if (mx < game->map.grid_height && mx > 0)
 	{
 		if (my < game->map.grid_height && my > 0)
@@ -106,9 +106,9 @@ void	go_forward(t_game *game)
 	int	my;
 
 	mx = (int)(game->player_x + (game->player_deltax * 2))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	my = (int)(game->player_y + (game->player_deltay * 2))
-		/ (HEIGHT / game->map.grid_height);
+		/ game->pix;
 	if (mx < game->map.grid_height && mx > 0)
 	{
 		if (my < game->map.grid_height && my > 0)
