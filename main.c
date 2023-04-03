@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/03 16:10:39 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:28:47 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	select_player_dir(t_game *game)
 
 void	ceiling_floor_colors(t_game *game)
 {
-	game->map.floor_int = rgb(game->map.floor[0],
-			game->map.floor[1], game->map.floor[2]);
-	game->map.ceiling_int = rgb(game->map.ceiling[0],
-			game->map.ceiling[1], game->map.ceiling[2]);
+	game->map.floor_int = game->map.floor[0] * 256 * 256
+		+ game->map.floor[1] * 256 + game->map.floor[2];
+	game->map.ceiling_int = game->map.ceiling[0] * 256 * 256
+		+ game->map.ceiling[1] * 256 + game->map.ceiling[2];
 }
 
 void	init_player_struct(t_game *game)
@@ -52,7 +52,7 @@ void	init_player_struct(t_game *game)
 	game->sprites.order = NULL;
 	game->sprites.dist = NULL;
 	game->sprites.sp_x = NULL;
-	game->sprites.sp_y = NULL;	
+	game->sprites.sp_y = NULL;
 	game->backwd = 0;
 	game->forwd = 0;
 	game->strafe_l = 0;
@@ -77,9 +77,6 @@ void	init_game_struct(t_game *game)
 	game->look_r = 0;
 	game->pix = 30;
 	game->sprint_mult = 4;
-	/* game->scale_ray = (game->map.grid_height / 2) + 2;
-	if (game->scale_ray < 8)
-		game->scale_ray = 8; */
 	game->scale_ray = 18;
 }
 
