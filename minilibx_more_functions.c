@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 09:05:53 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/03 15:08:49 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/03 15:26:53 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_minimap(t_minimap *minimap, t_game *game)
 	minimap->y = minimap->y - minimap->cases;
 	minimap->x_origin = 0;
 	minimap->y_origin = 0;
-	minimap->pix = HEIGHT / (game->map.grid_width);
+	minimap->pix = game->pix / 2;
 	if (minimap->pix > 50)
 		minimap->pix = 50;
 }
