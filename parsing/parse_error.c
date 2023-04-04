@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:57:35 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/20 11:08:36 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 10:51:57 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ void	parse_error(int n, t_map *map)
 		ft_putendl_fd("Error\nThe map must be closed with walls", 2);
 	else if (n == 7)
 		ft_putendl_fd("Error\nThis path leads to a directory", 2);
+	else if (n == 8)
+		ft_putendl_fd("Error\nWrong door configuration", 2);
 	free_map(map);
 	exit(1);
 }

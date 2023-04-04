@@ -6,7 +6,7 @@
 #    By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/14 11:58:12 by tgrasset          #+#    #+#              #
-#    Updated: 2023/04/03 17:49:30 by tgrasset         ###   ########.fr        #
+#    Updated: 2023/04/04 10:34:14 by tgrasset         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS	=	./main.c \
 			./parsing/closed_map_check.c \
 			./parsing/parsing_utils.c \
 			./parsing/copy_and_format_map.c \
+			./parsing/door_check.c \
 			./init_game.c \
 			./player_move.c \
 			./player_rotate.c \

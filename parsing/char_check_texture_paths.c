@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:28:50 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/29 12:00:03 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:12:18 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,13 @@ void	grid_char_check(char **c, t_map *map, int i, int j)
 		parse_error(4, map);
 	i = map->grid_start;
 	player = 0;
-	while (c[i] != NULL)
+	while (c[++i] != NULL)
 	{
 		j = 0;
 		while (c[i][j] != '\0' && (c[i][j] == ' ' || c[i][j] == '1'
 					|| c[i][j] == '0' || c[i][j] == 'N' || c[i][j] == 'S'
-					|| c[i][j] == 'W' || c[i][j] == 'E' || c[i][j] == '2'))
+					|| c[i][j] == 'W' || c[i][j] == 'E' || c[i][j] == '2'
+					|| c[i][j] == '3'))
 		{
 			if (c[i][j] == 'N' || c[i][j] == 'S' || c[i][j] == 'E'
 					|| c[i][j] == 'W')
@@ -66,7 +67,6 @@ void	grid_char_check(char **c, t_map *map, int i, int j)
 		}
 		if (c[i][j] != '\0' || c[i][0] == '\0')
 			parse_error(4, map);
-		i++;
 	}
 	if (player != 1)
 		parse_error(4, map);

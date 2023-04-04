@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/03 18:17:05 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:47:16 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_game
 	t_data			sp_4;
 	t_data			sp_5;
 	t_data			sp_6;
+	t_data			door;
 	float			player_x;
 	float			player_y;
 	float			player_deltax;
@@ -254,5 +255,6 @@ void	check_if_directory(char *path, t_map *map, int fd);
 int		skip_spaces(char *str, int i);
 void	useless_lines_check(char **content, t_map *map, int i);
 void	copy_map_grid(char **src, t_map *map, int i, int j);
+void	door_check(t_map *map);
 
 #endif

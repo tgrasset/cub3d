@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/16 10:56:50 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/29 14:30:14 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 10:25:13 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	get_player_info(char **grid, t_map *map)
 int	out_of_map(char c)
 {
 	if (c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W' && c != 'E'
-		&& c != '2')
+		&& c != '2' && c != '3')
 		return (1);
 	return (0);
 }

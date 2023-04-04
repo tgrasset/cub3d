@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:50:12 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/03/20 10:21:41 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:17:07 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	get_map_grid(t_map *map)
 		i++;
 	}
 	map->grid_height = i - map->grid_start;
+	closed_map_check(&map->content[map->grid_start], map, 0, 1);
 	copy_map_grid(&map->content[map->grid_start], map, 0, 0);
 }
 
@@ -93,8 +94,8 @@ void	parse_cub_file(int ac, char *path, t_map *map)
 	if (is_valid_extension(path) == 0)
 		parse_error(2, map);
 	extract_cub_file_content(path, map);
-	grid_char_check(map->content, map, 0, 0);
+	grid_char_check(map->content, map, -1, 0);
 	assign_struct_values(map);
-	closed_map_check(map->grid, map, 0, 1);
 	default_textures_paths_if_necessary(map);
+	door_check(map);
 }

@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 14:53:57 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/03 18:44:10 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:50:34 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	check_if_loaded(t_game *game)
 		|| game->east.img == NULL || game->west.img == NULL
 		|| game->sp_1.img == NULL || game->sp_2.img == NULL
 		|| game->sp_3.img == NULL || game->sp_4.img == NULL
-		|| game->sp_5.img == NULL || game->sp_6.img == NULL)
+		|| game->sp_5.img == NULL || game->sp_6.img == NULL
+		|| game->door.img == NULL)
 	{
 		ft_putendl_fd("Error\nTextures couldn't be loaded", 2);
 		close_program(game);
@@ -47,6 +48,8 @@ void	textures_get_data_addr(t_game *game)
 			&game->sp_5.ll, &game->sp_5.endian);
 	game->sp_6.addr = mlx_get_data_addr(game->sp_6.img, &game->sp_6.bpp,
 			&game->sp_6.ll, &game->sp_6.endian);
+	game->door.addr = mlx_get_data_addr(game->door.img, &game->door.bpp,
+			&game->door.ll, &game->door.endian);
 }
 
 void	load_textures(t_game *game)
@@ -71,6 +74,8 @@ void	load_textures(t_game *game)
 			&game->sp_5.w, &game->sp_5.h);
 	game->sp_6.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/s6.xpm",
 			&game->sp_6.w, &game->sp_6.h);
+	game->door.img = mlx_xpm_file_to_image(game->win->mlx, "./textures/dr.xpm",
+			&game->door.w, &game->door.h);
 	check_if_loaded(game);
 	textures_get_data_addr(game);
 }

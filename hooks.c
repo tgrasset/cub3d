@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/03 17:03:00 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:53:36 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	key_release(int keycode, t_game *game)
 
 void	close_program_2(t_game *game)
 {
+	if (game->door.img != NULL)
+		mlx_destroy_image(game->win->mlx, game->door.img);
 	if (game->sprites.dist != NULL)
 		free(game->sprites.dist);
 	if (game->sprites.order != NULL)
