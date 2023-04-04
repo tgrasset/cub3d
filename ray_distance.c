@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_distance.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:12:26 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 14:57:50 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:03:25 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	loop_distance_h(t_game *game)
 			&& game->store.mx >= 0
 			&& game->store.my < game->map.grid_height
 			&& game->store.mx < game->map.grid_height
-			&& game->map.grid[game->store.my][game->store.mx] == '1')
+			&& is_wall_or_door(game))
 		{
 			game->store.hx = game->store.rx;
 			game->store.hy = game->store.ry;
@@ -76,7 +76,7 @@ void	loop_distance_v(t_game *game)
 			&& game->store.mx >= 0
 			&& game->store.my < game->map.grid_height
 			&& game->store.mx < game->map.grid_height
-			&& game->map.grid[game->store.my][game->store.mx] == '1')
+			&& is_wall_or_door(game))
 		{
 			game->store.vx = game->store.rx;
 			game->store.vy = game->store.ry;

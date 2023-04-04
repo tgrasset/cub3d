@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 14:20:11 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:02:59 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,11 +196,13 @@ float	dist(float ax, float ay, float bx, float by);
 int		get_colour_from_texture(int height, t_data *data,
 			t_game *game, int wall_y);
 void	loop_loop_drawthree_d(t_game *game, float height, float offset, int j);
+int		is_wall_or_door(t_game *game);
 
 //hooks
 int		close_program(t_game *game);
 int		key_press(int keycode, t_game *game);
 int		key_release(int keycode, t_game *game);
+void	open_close_door(t_game *game);
 
 //player_move
 void	go_backward(t_game *game);
