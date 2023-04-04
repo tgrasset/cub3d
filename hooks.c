@@ -3,14 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/04 11:53:36 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:01:14 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	open_close_door(t_game *game)
+{
+	int	mx;
+	int	my;
+
+	mx = (int)game->player_x / game->pix;
+	my = (int)game->player_y / game->pix;
+	if (mx > 0 && game->map.grid[my][mx - 1] == '3')
+		game->map.grid[my][mx - 1] = '4';
+	else if (my > 0 && game->map.grid[my - 1][mx] == '3')
+		game->map.grid[my - 1][mx] = '4';
+	else if (my < game->map.grid_height - 1
+		&& game->map.grid[my + 1][mx] == '3')
+		game->map.grid[my + 1][mx] = '4';
+	else if (mx < game->map.grid_height - 1
+		&& game->map.grid[my][mx + 1] == '3')
+		game->map.grid[my][mx + 1] = '4';
+	else if (mx > 0 && game->map.grid[my][mx - 1] == '4')
+		game->map.grid[my][mx - 1] = '3';
+	else if (my > 0 && game->map.grid[my - 1][mx] == '4')
+		game->map.grid[my - 1][mx] = '3';
+	else if (my < game->map.grid_height - 1
+		&& game->map.grid[my + 1][mx] == '4')
+		game->map.grid[my + 1][mx] = '3';
+	else if (mx < game->map.grid_height - 1
+		&& game->map.grid[my][mx + 1] == '4')
+		game->map.grid[my][mx + 1] = '3';
+}
 
 int	key_press(int keycode, t_game *game)
 {
@@ -35,6 +64,8 @@ int	key_press(int keycode, t_game *game)
 		&& keycode != XK_w && keycode != XK_d && keycode != XK_a
 		&& keycode != XK_Escape && keycode != 65505)
 		game->focus = 0;
+	if (keycode == 32)
+		open_close_door(game);	
 	return (0);
 }
 

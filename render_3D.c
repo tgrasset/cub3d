@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   render_3D.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:38:02 by tgrasset          #+#    #+#             */
 /*   Updated: 2023/04/04 17:25:46 by tgrasset         ###   ########.fr       */
@@ -55,7 +55,12 @@ void	loop_loop_drawthree_d(t_game *game, float height, float offset, int j)
 	py = (game->player_y) / game->pix;
 	while (j < height + offset)
 	{
-		if (game->store.distance == game->store.dis_h && py > game->store.my)
+		if (game->map.grid[game->store.my][game->store.mx] == '3')
+		{
+			pixel_put(game->img, j, game->store.r, get_colour_from_texture(
+					height, &game->door, game, j - offset));
+		}
+		else if (game->store.distance == game->store.dis_h && py > game->store.my)
 			pixel_put(game->img, j, game->store.r, get_colour_from_texture(
 					height, &game->south, game, j - offset));
 		else if (game->store.distance == game->store.dis_h
