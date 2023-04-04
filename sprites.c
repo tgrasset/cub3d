@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:16:51 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 15:04:34 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:12:06 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	draw_sprites(t_game *game, int i)
 	check_distance_and_sort(game, 0);
 	while (++i < game->map.sprite_nb)
 	{
-		if (game->sprites.dist[i] < 1000)
+		if (game->sprites.dist[i] < 1000 || in_fov(game, i) == 0)
 		{
 			i++;
 			continue ;
@@ -93,8 +93,8 @@ void	draw_sprites(t_game *game, int i)
 		sn = sin(game->player_angle);
 		sx = game->sprites.rel_y * cs - game->sprites.rel_x * sn;
 		sy = game->sprites.rel_x * cs + game->sprites.rel_y * sn;
-		sx = (sx * 900.0 / sy) + (RAY_NUMBER / 2);
-		sy = (sz * 900.0 / sy) + (HEIGHT / 2);
+		sx = (sx * 800.0 / sy) + (RAY_NUMBER / 2);
+		sy = (sz * 800.0 / sy) + (HEIGHT / 2);
 		display_sprite(game, sx, sy, i);
 	}
 }
