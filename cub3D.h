@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 14:20:11 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:52:00 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,8 @@ void	check_mouse_move(t_game *game);
 void	draw_sprites(t_game *game, int i);
 void	init_sprite_struct(t_game *game, int i, int j, int k);
 void	check_distance_and_sort(t_game *game, int i);
+int		in_fov(t_game *game, int i);
+int		in_fov_2(t_game *game, int i);
 
 // parsing functions
 
