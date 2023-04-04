@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:48:06 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 10:58:35 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:04:13 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	go_backward(t_game *game)
 		if (my < game->map.grid_height && my > 0)
 		{
 			if (game->map.grid[my][mx] != '1' && game->map.grid[my][mx] != '3'
-				 && check_wallhack_backward(game))
+				&& check_wallhack_backward(game))
 			{
 				game->player_x -= game->player_deltax / game->sprint_mult;
 				game->player_y -= game->player_deltay / game->sprint_mult;
