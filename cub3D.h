@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 10:33:59 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 11:47:16 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ typedef struct s_game
 	t_data			sp_4;
 	t_data			sp_5;
 	t_data			sp_6;
+	t_data			door;
 	float			player_x;
 	float			player_y;
 	float			player_deltax;
