@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:16:51 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/03 18:43:17 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:04:34 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	display_sprite(t_game *game, float sx, float sy, int i)
 		{
 			colour = choose_frame(game, wid, j - (int)sx, k - (int)sy);
 			if (j > 0 && j < RAY_NUMBER && k > 0 && k < HEIGHT
-				&& colour != 0x00FF2F)
+				&& colour != 0x00FF2F
+				&& game->sprites.dist[i] < game->ray_dist[j])
 				pixel_put(game->img, k, j, colour);
 			k++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 11:47:16 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 14:20:11 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct s_game
 	float			strafe_angle;
 	float			strafe_deltax;
 	float			strafe_deltay;
+	float			ray_dist[RAY_NUMBER];
 	t_raystorage	store;
 	int				scale_ray;
 	int				forwd;
