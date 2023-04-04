@@ -239,6 +239,8 @@ void	check_mouse_move(t_game *game);
 void	draw_sprites(t_game *game, int i);
 void	init_sprite_struct(t_game *game, int i, int j, int k);
 void	check_distance_and_sort(t_game *game, int i);
+int		in_fov(t_game *game, int i);
+int		in_fov_2(t_game *game, int i);
 
 // parsing functions
 

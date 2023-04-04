@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:49:18 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 14:56:47 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/04 16:55:30 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,60 @@ void	check_distance_and_sort(t_game *game, int i)
 		i++;
 	}
 	sort_sprites_from_furthest(game, 0, 0, 0);
+}
+
+int	in_fov(t_game *game, int i)
+{
+	if (game->player_angle > 0 && game->player_angle <= P2)
+	{
+		if (game->player_y > game->sprites.sp_y[i]
+			&& game->player_x > game->sprites.sp_x[i])
+			return (0);
+	}
+	else if (game->player_angle > P2 && game->player_angle <= PI)
+	{
+		if (game->player_y > game->sprites.sp_y[i]
+			&& game->player_x < game->sprites.sp_x[i])
+			return (0);
+	}
+	else if (game->player_angle > PI && game->player_angle <= P3)
+	{
+		if (game->player_y < game->sprites.sp_y[i]
+			&& game->player_x < game->sprites.sp_x[i])
+			return (0);
+	}
+	else if (game->player_angle > P3)
+	{
+		if (game->player_y < game->sprites.sp_y[i]
+			&& game->player_x > game->sprites.sp_x[i])
+			return (0);
+	}
+	return (in_fov_2(game, i));
+}
+
+int	in_fov_2(t_game *game, int i)
+{
+	if (game->player_angle > P2 / 2 && game->player_angle <= P2 + PI / 4)
+	{
+		if (game->player_y > game->sprites.sp_y[i])
+			return (0);
+	}
+	else if (game->player_angle > P2 + PI / 4
+		&& game->player_angle <= PI + PI / 4)
+	{
+		if (game->player_x < game->sprites.sp_x[i])
+			return (0);
+	}
+	else if (game->player_angle > PI + PI / 4
+		&& game->player_angle <= P3 + PI / 4)
+	{
+		if (game->player_y < game->sprites.sp_y[i])
+			return (0);
+	}
+	else
+	{
+		if (game->player_x > game->sprites.sp_x[i])
+			return (0);
+	}
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:38:02 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 16:30:27 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:25:46 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ void	draw_three_d(t_game *game, float distance, float ra)
 		height = HEIGHT;
 	offset = (HEIGHT / 2) - height / 2;
 	loop_draw_three_d(game, height, offset);
+	game->ray_dist[game->store.r] = distance * distance;
 }

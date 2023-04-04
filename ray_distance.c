@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:12:26 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 17:03:25 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:21:30 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	pick_v_or_h(t_game *game)
 	game->store.mx = (int)(game->store.rx) / game->pix;
 	game->store.my = (int)(game->store.ry) / game->pix;
 	game->store.mp = game->store.my * game->map.grid_height + game->store.mx;
-	game->ray_dist[game->store.r] = game->store.distance * game->store.distance;
 }
 
 void	loop_distance_h(t_game *game)
