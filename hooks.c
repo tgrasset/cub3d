@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 15:04:14 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/04 17:01:14 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:28:25 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	key_press(int keycode, t_game *game)
 	if (keycode && keycode != XK_Left && keycode != XK_Right
 		&& keycode != XK_Down && keycode != XK_s && keycode != XK_Up
 		&& keycode != XK_w && keycode != XK_d && keycode != XK_a
-		&& keycode != XK_Escape && keycode != 65505)
+		&& keycode != XK_Escape && keycode != 65505 && keycode != 32)
 		game->focus = 0;
 	if (keycode == 32)
-		open_close_door(game);	
+		open_close_door(game);
 	return (0);
 }
 

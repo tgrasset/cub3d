@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_3D.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:38:02 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 17:25:46 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:42:57 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,10 @@ void	loop_loop_drawthree_d(t_game *game, float height, float offset, int j)
 	while (j < height + offset)
 	{
 		if (game->map.grid[game->store.my][game->store.mx] == '3')
-		{
 			pixel_put(game->img, j, game->store.r, get_colour_from_texture(
 					height, &game->door, game, j - offset));
-		}
-		else if (game->store.distance == game->store.dis_h && py > game->store.my)
+		else if (game->store.distance == game->store.dis_h
+			&& py > game->store.my)
 			pixel_put(game->img, j, game->store.r, get_colour_from_texture(
 					height, &game->south, game, j - offset));
 		else if (game->store.distance == game->store.dis_h
@@ -68,14 +67,8 @@ void	loop_loop_drawthree_d(t_game *game, float height, float offset, int j)
 			pixel_put(game->img, j, game->store.r,
 				get_colour_from_texture(height, &game->north,
 					game, j - offset));
-		else if (game->store.distance == game->store.dis_v
-			&& px > game->store.mx)
-			pixel_put(game->img, j, game->store.r,
-				get_colour_from_texture(height, &game->west, game, j - offset));
-		else if (game->store.distance == game->store.dis_v
-			&& px < game->store.mx)
-			pixel_put(game->img, j, game->store.r,
-				get_colour_from_texture(height, &game->east, game, j - offset));
+		else
+			east_west_walls(game, height, offset, j);
 		j++;
 	}
 }

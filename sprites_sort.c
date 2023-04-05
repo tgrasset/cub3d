@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:49:18 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/04 16:55:30 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:31:28 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ void	sort_sprites_from_furthest(t_game *game, int i, int j, float tmp)
 				tmp = game->sprites.order[j];
 				game->sprites.order[j] = game->sprites.order[i];
 				game->sprites.order[i] = (int)tmp;
+				tmp = game->sprites.sp_x[j];
+				game->sprites.sp_x[j] = game->sprites.sp_x[i];
+				game->sprites.sp_x[i] = tmp;
+				tmp = game->sprites.sp_y[j];
+				game->sprites.sp_y[j] = game->sprites.sp_y[i];
+				game->sprites.sp_y[i] = tmp;
 			}
 			j++;
 		}
@@ -69,8 +75,8 @@ void	check_distance_and_sort(t_game *game, int i)
 	{
 		game->sprites.order[i] = i;
 		game->sprites.dist[i] = ((game->player_x - game->sprites.sp_x[i])
-				* (game->player_x - game->sprites.sp_x[i]) + (game->player_y
-					- game->sprites.sp_y[i])
+				* (game->player_x - game->sprites.sp_x[i])
+				+ (game->player_y - game->sprites.sp_y[i])
 				* (game->player_y - game->sprites.sp_y[i]));
 		i++;
 	}
