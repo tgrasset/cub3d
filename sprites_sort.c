@@ -6,7 +6,7 @@
 /*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:49:18 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/05 12:31:28 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/05 12:52:08 by tgrasset         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	init_sprite_struct(t_game *game, int i, int j, int k)
 		{
 			if (game->map.grid[i][j] == '2')
 			{
-				game->sprites.sp_x[k] = 30 * (float)j + 0.5;
-				game->sprites.sp_y[k] = 30 * (float)i + 0.5;
+				game->sprites.sp_x[k] = 30 * (float)j + 15;
+				game->sprites.sp_y[k] = 30 * (float)i + 15;
 				k++;
 			}
 			j++;
