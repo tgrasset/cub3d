@@ -1,0 +1,13 @@
+WE ./textures/metal.xpm
+NO ./textures/mur_moche.xpm
+SO ./textures/red_bricks.xpm
+EA ./textures/wood.xpm
+
+F 0,100,0
+C 0,0,100
+
+111
+ 101
+1W001
+ 101
+  1

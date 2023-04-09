@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 14:16:51 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/05 12:25:41 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:53:49 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,6 @@ int	get_sprite_colour(t_data *data, int width, int x, int y)
 
 int	choose_frame(t_game *game, int width, int x, int y)
 {
-	int	height;
-
-	height = width * 23 / 14;
 	if (game->frame > 0 && game->frame <= LOOP / 6)
 		return (get_sprite_colour(&game->sp_1, width, x, y));
 	else if (game->frame > LOOP / 6 && game->frame <= 2 * (LOOP / 6))

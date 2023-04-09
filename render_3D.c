@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_3D.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:38:02 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/05 12:42:57 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:52:38 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ void	pixel_put(t_data *data, int x, int y, int color)
 
 void	loop_loop_drawthree_d(t_game *game, float height, float offset, int j)
 {
-	float	px;
 	float	py;
 
-	px = (game->player_x) / game->pix;
 	py = (game->player_y) / game->pix;
 	while (j < height + offset)
 	{

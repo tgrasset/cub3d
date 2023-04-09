@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 12:03:34 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/03 17:28:47 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:55:01 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	ceiling_floor_colors(t_game *game)
 
 void	init_player_struct(t_game *game)
 {
-	game->player_y = 30 * game->map.p_y;
-	game->player_x = 30 * game->map.p_x;
+	game->player_y = (game->pix * game->map.p_y) + (game->pix / 2);
+	game->player_x = (game->pix * game->map.p_x) + (game->pix / 2);
 	game->store.dof_max = game->map.grid_height - 1;
 	game->sprites.order = NULL;
 	game->sprites.dist = NULL;
@@ -85,12 +85,12 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	parse_cub_file(ac, av[1], &game.map);
-	init_player_struct(&game);
 	select_player_dir(&game);
+	init_game_struct(&game);
+	init_player_struct(&game);
 	ceiling_floor_colors(&game);
 	if (game.map.sprite_nb > 0)
 		init_sprite_struct(&game, 0, 0, 0);
-	init_game_struct(&game);
 	init_mlx(&game);
 	close_program(&game);
 	return (0);

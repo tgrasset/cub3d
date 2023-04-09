@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/05 12:43:03 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:53:32 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ void	draw_rays(t_game *game)
 void	east_west_walls(t_game *game, float height, float offset, int j)
 {
 	float	px;
-	float	py;
 
 	px = (game->player_x) / game->pix;
-	py = (game->player_y) / game->pix;
 	if (game->store.distance == game->store.dis_v
 		&& px > game->store.mx)
 		pixel_put(game->img, j, game->store.r,
