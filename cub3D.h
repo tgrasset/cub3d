@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 13:10:40 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/05 12:43:21 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:21:52 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,8 @@ void	move_player(t_game *game);
 //player_rotate
 void	turn_left(t_game *game);
 void	turn_right(t_game *game);
+void	turn_right_mouse(t_game *game);
+void	turn_left_mouse(t_game *game);
 
 //wall_secure
 int		check_wallhack(t_game *game);

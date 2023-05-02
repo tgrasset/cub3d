@@ -6,7 +6,7 @@
 /*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 23:20:40 by ael-youb          #+#    #+#             */
-/*   Updated: 2023/04/09 22:53:32 by ael-youb         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:24:42 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	reinitialize_distances(t_game *game)
 void	draw_rays(t_game *game)
 {
 	init_draw_ray(game);
-	while (game->store.r < RAY_NUMBER)
+	while (game->store.r < RAY_NUMBER - 1)
 	{
 		reinitialize_distances(game);
 		distance_h(game);

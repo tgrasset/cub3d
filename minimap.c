@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrasset <tgrasset@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-youb <ael-youb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 16:28:09 by tgrasset          #+#    #+#             */
-/*   Updated: 2023/04/03 17:30:01 by tgrasset         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:15:32 by ael-youb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	draw_player(t_game *game)
 		j = cases * pix + (pix / 2);
 		i++;
 	}
-	//util_draw_player(game, cases, pix);
 }
 
 void	init_minimap(t_minimap *minimap, t_game *game)
