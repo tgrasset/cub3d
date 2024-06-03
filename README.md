@@ -4,7 +4,7 @@ This project is a wolfenstein-like little program coded in C using raycasting. N
 
 ![Cub3D](cub3d.gif)
 
-## Raycasting ? What's that ?
+## Raycasting ?
 Raycasting is a technique used in computer graphics to create a 3D-like perspective in a 2D game world. Imagine you are standing in a maze and you shine a flashlight straight ahead. The light beam is like a "ray" that travels until it hits a wall.
 
 In raycasting, the game sends out many rays from the player's position, one for each column of pixels on the screen. Each ray moves forward until it hits an obstacle, like a wall. The distance each ray travels determines how tall the wall appears on the screen, creating the illusion of depth. Closer walls look taller, and farther walls look shorter.
