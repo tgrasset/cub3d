@@ -34,7 +34,7 @@
 # define RAY_NUMBER 1080
 # define SCALE_RAY 18
 # define HEIGHT 768
-# define LOOP 12
+# define LOOP 48
 
 typedef struct s_minimap
 {
